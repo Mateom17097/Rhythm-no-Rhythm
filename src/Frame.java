@@ -23,17 +23,22 @@ import javax.swing.Timer;
 import java.util.concurrent.TimeUnit;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	public static boolean debugging = true;
-	//Timer related variables
+
 	
 	int score = 0;
 	
 	Font myFont = new Font("Courier", Font.BOLD, 40);
-
-//	Music soundBang = new Music("bang.wav", false);
-//	Music soundHaha = new Music("haha.wav", false);
+	
+	public void paint(Graphics g) {
+		super.paintComponent(g);
+		
+		
+	}
+	
 	
 	public static void main(String[] arg) {
 		Frame f = new Frame();
+		
 		
 	}
 	
