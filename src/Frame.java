@@ -117,7 +117,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stub
 		System.out.println(arg0.getKeyCode());
 		if(arg0.getKeyCode() == 82) {
-			pinkNote.vx *= -1;
+			if(pinkNote.collided(hole)) {
+				pinkNote.x = 920;
+			}
 		
 			
 		}

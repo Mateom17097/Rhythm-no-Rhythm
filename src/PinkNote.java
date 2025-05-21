@@ -40,10 +40,10 @@ public class PinkNote{
 		
 	}
 	
-	/*
-	 * Collision detection with main character class
+	
+	
 	 
-	public boolean collided(Ghost character) {
+	public boolean collided(Hole character) {
 		
 		//represent each object as a rectangle
 		//then check if they are intersecting
@@ -61,18 +61,8 @@ public class PinkNote{
 	}
 	
 	//2nd constructor - allow setting x and  y during construction
-	public Bat(int x, int y) {
-		
-		//call the default constructor for all the normal stuff
-		this(); //invokes default constructor
-		
-		// do the specific task for THIS constructor
-		this.x = x;
-		this.y = y;
-		
-		
-	}
-	 	*/
+	
+	 
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
@@ -84,7 +74,7 @@ public class PinkNote{
 		init(x,y);
 		
 		if(x <= 0 ) {
-			vx=30;
+			x = 920;
 		}
 		
 		if(x >= 920) {

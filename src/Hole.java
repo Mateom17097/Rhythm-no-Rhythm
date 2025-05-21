@@ -15,8 +15,97 @@ public class Hole{
 	int width, height;				//collision detection
 	int x, y;						//position of the object
 	int vx, vy;						//movement variables
-	double scaleWidth = .15;		//change to scale image
+	double scaleWidth = .15;	//change to scale image
 	double scaleHeight = .2; 		//change to scale image
+	public Image getForward() {
+		return forward;
+	}
+
+	public void setForward(Image forward) {
+		this.forward = forward;
+	}
+
+	public AffineTransform getTx() {
+		return tx;
+	}
+
+	public void setTx(AffineTransform tx) {
+		this.tx = tx;
+	}
+
+	public int getDir() {
+		return dir;
+	}
+
+	public void setDir(int dir) {
+		this.dir = dir;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getVx() {
+		return vx;
+	}
+
+	public void setVx(int vx) {
+		this.vx = vx;
+	}
+
+	public int getVy() {
+		return vy;
+	}
+
+	public void setVy(int vy) {
+		this.vy = vy;
+	}
+
+	public double getScaleWidth() {
+		return scaleWidth;
+	}
+
+	public void setScaleWidth(double scaleWidth) {
+		this.scaleWidth = scaleWidth;
+	}
+
+	public double getScaleHeight() {
+		return scaleHeight;
+	}
+
+	public void setScaleHeight(double scaleHeight) {
+		this.scaleHeight = scaleHeight;
+	}
+
+	
 
 	public Hole() {
 		forward 	= getImage("/imgs/"+"Hole.png"); //load the image for Tree
