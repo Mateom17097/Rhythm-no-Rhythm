@@ -15,22 +15,22 @@ public class PinkNote{
 	int width, height;				//collision detection
 	int x, y;						//position of the object
 	int vx, vy;						//movement variables
-	double scaleWidth = 1.0;		//change to scale image
-	double scaleHeight = 1.0; 		//change to scale image
+	double scaleWidth = 0.07;		//change to scale image
+	double scaleHeight = 0.03; 		//change to scale image
 
 	public PinkNote() {
-		forward 	= getImage("/imgs/"+"bat frog sprite small.png"); //load the image for Tree
+		forward 	= getImage("/imgs/"+"Baabu.png"); //load the image for Tree
 
 		//width and height for hitbox
-		width = 70;
-		height = 70;
+		width = 80;
+		height = 80;
 		
 		//used for placement on the JFrame
-		x = 600/2-width/2;
-		y = 600;
+		x = 1000;
+		y = 500;
 		
 		//if your movement will not be "hopping" base
-		vx = 0;
+		vx = -30;
 		vy = 0;
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
@@ -83,7 +83,14 @@ public class PinkNote{
 		
 		init(x,y);
 		
-
+		if(x <= 0 ) {
+			vx=30;
+		}
+		
+		if(x >= 920) {
+			vx=-30;
+		}
+		
 		g2.drawImage(forward, tx, null);
 			
 		//draw hitbox based on x,y, width, heigh

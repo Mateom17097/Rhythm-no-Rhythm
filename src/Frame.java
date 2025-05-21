@@ -28,10 +28,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	int score = 0;
 	
 	Font myFont = new Font("Courier", Font.BOLD, 40);
-	
+	PinkNote pinkNote = new PinkNote();
+	Hole hole = new Hole();
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		
+		pinkNote.paint(g);
+		hole.paint(g);
 		
 	}
 	
@@ -113,7 +115,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-	
+		System.out.println(arg0.getKeyCode());
+		if(arg0.getKeyCode() == 82) {
+			pinkNote.vx *= -1;
+		
+			
+		}
 	}
 
 	@Override
