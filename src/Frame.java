@@ -14,6 +14,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     BlueNote blueNote = new BlueNote();
     Hole hole = new Hole();
     Hole2 hole2 = new Hole2();
+    StartScreen start = new StartScreen();
 
     public int width = 1000;
     public int height = 1000;
@@ -44,9 +45,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     public void paint(Graphics g) {
         super.paintComponent(g);
         if (state == STATE.MENU) {
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, width, height);
-
+            start.paint(g);
             g.setColor(Color.WHITE);
             g.setFont(myFont);
             g.drawString("Rhythm no Rhythm", 280, 300);
