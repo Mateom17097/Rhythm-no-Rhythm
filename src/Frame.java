@@ -29,12 +29,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	Font myFont = new Font("Courier", Font.BOLD, 40);
 	PinkNote pinkNote = new PinkNote();
+	BlueNote blueNote = new BlueNote();
 	Hole hole = new Hole();
+	Hole2 hole2 = new Hole2();
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		pinkNote.paint(g);
+		blueNote.paint(g);
 		hole.paint(g);
-		
+		hole2.paint(g);
 	}
 	
 	
@@ -116,15 +119,22 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		//System.out.println(arg0.getKeyCode());
-		if(arg0.getKeyCode() == 82) {
+		if(arg0.getKeyCode() == 70) {
 			if(pinkNote.collided(hole)) {
 				pinkNote.x = 920;
 				System.out.println("Hit!");
 			}else if(!pinkNote.collided(hole)) {
 				System.out.println("Slow Down!");
 			}
-		
+		if(arg0.getKeyCode() == 74) {
+			if(blueNote.collided(hole2)) {
+				blueNote.x = 0;
+				System.out.println("Hit!");
+			}else if(!blueNote.collided(hole2)) {
+				System.out.println("Slow Down!");
+			}
 			
+			}
 		}
 	}
 
