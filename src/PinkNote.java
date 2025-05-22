@@ -75,11 +75,10 @@ public class PinkNote{
 		
 		if(x <= 0 ) {
 			x = 920;
+			System.out.println("MISS!");
 		}
 		
-		if(x >= 920) {
-			vx=-30;
-		}
+		
 		
 		g2.drawImage(forward, tx, null);
 			
