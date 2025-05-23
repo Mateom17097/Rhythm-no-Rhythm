@@ -48,9 +48,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             start.paint(g);
             g.setColor(Color.WHITE);
             g.setFont(myFont);
-            g.drawString("Rhythm no Rhythm", 280, 300);
-            g.setFont(new Font("Courier", Font.PLAIN, 30));
-            g.drawString("Press ENTER to Start", 320, 400);
+           
         } else if (state == STATE.GAME) {
             pinkNote.paint(g);
             blueNote.paint(g);

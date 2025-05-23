@@ -13,9 +13,9 @@ public class StartScreen{
 	int dir = 0; 					//0-forward, 1-backward, 2-left, 3-right
 	int width, height;				//collision detection
 	int x, y;						//position of the object
-	int vx, vy;						//movement variables
-	double scaleWidth = 6.0;		//change to scale image
-	double scaleHeight = 8.0; 		//change to scale image
+	double vx, vy;						//movement variables
+	double scaleWidth = 4.927;		//change to scale image
+	double scaleHeight = 4.5; 		//change to scale image
 
 	public StartScreen() {
 		forward 	= getImage("/imgs/"+"keepitMOVIN!.gif"); //load the image for Tree
@@ -30,7 +30,7 @@ public class StartScreen{
 		
 		//if your movement will not be "hopping" base
 		vx = 0;
-		vy = 0;
+		vy = -5;
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		
@@ -62,7 +62,14 @@ public class StartScreen{
 		
 		init(x,y);
 		
-
+		if(y >= -700 ) {
+			vy *= -1;
+			
+		}
+		if(y <= 0 ) {
+			vy *= -1;
+			
+		}
 		g2.drawImage(forward, tx, null);
 			
 		//draw hitbox based on x,y, width, heigh
