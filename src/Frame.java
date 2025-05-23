@@ -14,13 +14,17 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     BlueNote blueNote = new BlueNote();
     Hole hole = new Hole();
     Hole2 hole2 = new Hole2();
+    TitleCard titleCard = new TitleCard();
     StartScreen start = new StartScreen();
+    
+    //SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\Daft.wav", true);
 
     public int width = 1000;
     public int height = 1000;
 
     public static void main(String[] arg) {
         Frame f = new Frame();
+        
     }
 
     public Frame() {
@@ -39,17 +43,22 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         t.start();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+        
     }
 
     @Override
     public void paint(Graphics g) {
         super.paintComponent(g);
         if (state == STATE.MENU) {
+        	
             start.paint(g);
+            titleCard.paint(g);
             g.setColor(Color.WHITE);
             g.setFont(myFont);
+            
            
         } else if (state == STATE.GAME) {
+   
             pinkNote.paint(g);
             blueNote.paint(g);
             hole.paint(g);
