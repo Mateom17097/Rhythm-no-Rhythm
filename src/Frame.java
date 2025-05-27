@@ -5,10 +5,11 @@ import javax.swing.*;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
     public static boolean debugging = true;
 
-    private enum STATE { MENU, GAME }
+    private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
-	
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("ATW.wav", true);
+
+
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
 	
     int score = 0;
     Font myFont = new Font("Courier", Font.BOLD, 40);
@@ -96,15 +97,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     public void keyPressed(KeyEvent e) {
         if (state == STATE.MENU && e.getKeyCode() == KeyEvent.VK_ENTER) {
-	try {
-            titleScreenMusic.stop();
-            }catch(Exception ex) {
-            	ex.printStackTrace();
-            }
-            state = STATE.GAME;
+	
+            state = STATE.SELECT;
             return;
         }
-
+        if(state == STATE.SELECT && e.getKeyCode() == KeyEvent.VK_ENTER) {
+        	try {
+                titleScreenMusic.stop();
+                }catch(Exception ex) {
+                	ex.printStackTrace();
+                }
+        	state = STATE.GAME;
+        }
         if (state == STATE.GAME) {
             if (e.getKeyCode() == 70) { // F key
                 if (pinkNote.collided(hole)) {
