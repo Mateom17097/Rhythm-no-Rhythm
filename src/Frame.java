@@ -16,6 +16,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     Hole2 hole2 = new Hole2();
     TitleCard titleCard = new TitleCard();
     StartScreen start = new StartScreen();
+    EnterToStart enter = new EnterToStart();
     
     //SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\Daft.wav", true);
 
@@ -32,7 +33,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         f.setSize(new Dimension(width, height));
         f.setBackground(Color.gray);
         f.add(this);
-        f.setResizable(false);
+        f.setResizable(false); 
         f.addMouseListener(this);
         f.addKeyListener(this);
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
@@ -53,6 +54,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         	
             start.paint(g);
             titleCard.paint(g);
+            enter.paint(g);
             g.setColor(Color.WHITE);
             g.setFont(myFont);
             
