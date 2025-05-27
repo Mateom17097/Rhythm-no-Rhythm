@@ -63,6 +63,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             blueNote.paint(g);
             hole.paint(g);
             hole2.paint(g);
+            
+            
+            
         }
     }
 
@@ -101,6 +104,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 } else {
                     System.out.println("Slow Down!");
                 }
+                
+            }
+            
+            if(e.getKeyCode() == 101) {
+            	state = STATE.MENU;
+            	
             }
 
             if (e.getKeyCode() == 74) { // J key
