@@ -124,7 +124,7 @@ public class TitleCard{
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		
-		init(x, y); 				//initialize the location of the image
+		init(x, y); 				//initialize the location  of the image
 									//use your variables
 		
 	}

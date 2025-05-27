@@ -62,7 +62,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         } else if (state == STATE.GAME) {
    
             pinkNote.paint(g);
-            blueNote.paint(g);
+            blueNote.paint(g); 
             hole.paint(g);
             hole2.paint(g);
             
