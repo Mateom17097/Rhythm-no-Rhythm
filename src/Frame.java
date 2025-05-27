@@ -7,7 +7,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
     private enum STATE { MENU, GAME }
     private STATE state = STATE.MENU;
-
+	
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("ATW.wav", true);
+	
     int score = 0;
     Font myFont = new Font("Courier", Font.BOLD, 40);
     PinkNote pinkNote = new PinkNote();
@@ -94,6 +96,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     public void keyPressed(KeyEvent e) {
         if (state == STATE.MENU && e.getKeyCode() == KeyEvent.VK_ENTER) {
+	try {
+            titleScreenMusic.stop();
+            }catch(Exception ex) {
+            	ex.printStackTrace();
+            }
             state = STATE.GAME;
             return;
         }
