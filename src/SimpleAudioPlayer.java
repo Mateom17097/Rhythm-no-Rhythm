@@ -55,12 +55,18 @@ public class SimpleAudioPlayer   {
   
       
     // Method to play the audio 
-    public void play()  
-    { 
-        //start the clip 
-        clip.start(); 
-        status = "play"; 
-    } 
+    public void play() {
+        try {
+            if (clip == null || !clip.isOpen()) {
+                resetAudioStream(); // reopen the stream and loop if needed
+            }
+            clip.start();
+            status = "play";
+        } catch (Exception e) {
+            System.out.println("Error playing audio: " + e.getMessage());
+        }
+    }
+
       
     // Method to pause the audio 
     public void pause()  
@@ -105,13 +111,16 @@ public class SimpleAudioPlayer   {
     } 
       
     // Method to stop the audio 
-    public void stop() throws UnsupportedAudioFileException, 
-    IOException, LineUnavailableException  
-    { 
-        currentFrame = 0L; 
-        clip.stop(); 
-        clip.close(); 
-    } 
+    public void stop() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        currentFrame = 0L;
+        if (clip != null && clip.isOpen()) {
+            clip.stop();
+            clip.close();
+        }
+        status = "stopped";
+    }
+
+
       
     // Method to jump over a specific part 
     public void jump(long c) throws UnsupportedAudioFileException, IOException, 
