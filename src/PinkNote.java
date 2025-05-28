@@ -7,7 +7,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class PinkNote{
+public class PinkNote extends Frame{
 	private Image forward; // backward, left, right; 	
 	private AffineTransform tx;
 	
@@ -76,6 +76,7 @@ public class PinkNote{
 		if(x <= 0 ) {
 			x = 920;
 			System.out.println("MISS!");
+			
 		}
 		
 		
