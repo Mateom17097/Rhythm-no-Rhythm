@@ -12,6 +12,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
 	
     int score = 0;
+    int combo = 0;
     Font myFont = new Font("Courier", Font.BOLD, 40);
     PinkNote pinkNote = new PinkNote();
     BlueNote blueNote = new BlueNote();
@@ -120,24 +121,33 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             }
         
         if (state == STATE.GAME) {
-            if (e.getKeyCode() == 70) { // F key
+  if (e.getKeyCode() == 70) { // F key
                 if (pinkNote.collided(hole)) {
                     pinkNote.x = 920;
                     System.out.println("Hit!");
+                    score++;
+                    System.out.println("Score: " + score);
                 } else {
                     System.out.println("Slow Down!");
+                    
                 }
                 
             }
             
-            
+            if(e.getKeyCode() == 101) {
+            	state = STATE.MENU;
+            	
+            }
 
             if (e.getKeyCode() == 74) { // J key
                 if (blueNote.collided(hole2)) {
                     blueNote.x = 0;
                     System.out.println("Hit!");
+                    score++;
+                    System.out.println("Score: " + score);
                 } else {
                     System.out.println("Slow Down!");
+                   
                 }
             }
         }
