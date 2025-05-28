@@ -7,7 +7,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class PinkNote extends Frame{
+public class PinkNote {
 	private Image forward; // backward, left, right; 	
 	private AffineTransform tx;
 	
