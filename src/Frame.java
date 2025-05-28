@@ -20,6 +20,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     TitleCard titleCard = new TitleCard();
     StartScreen start = new StartScreen();
     EnterToStart enter = new EnterToStart();
+    SongSelect songSelect = new SongSelect();
+    
     
     //SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\Daft.wav", true);
 
@@ -71,6 +73,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             
             
             
+        } else if (state == STATE.SELECT) {
+        	songSelect.paint(g);
         }
     }
 
@@ -109,6 +113,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 }
         	state = STATE.GAME;
         }
+        
+        if(e.getKeyCode() == 101) {
+            	state = STATE.MENU;
+            	titleScreenMusic.play();
+            }
+        
         if (state == STATE.GAME) {
             if (e.getKeyCode() == 70) { // F key
                 if (pinkNote.collided(hole)) {
@@ -120,10 +130,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 
             }
             
-            if(e.getKeyCode() == 101) {
-            	state = STATE.MENU;
-            	
-            }
+            
 
             if (e.getKeyCode() == 74) { // J key
                 if (blueNote.collided(hole2)) {
