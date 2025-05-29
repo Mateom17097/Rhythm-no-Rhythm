@@ -14,10 +14,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     int combo = 0;
     Font myFont = new Font("Courier", Font.BOLD, 40);
    
-    private final int Perfect = 10;
-    private final int Good = 25;
-    private final int Okay = 50;
-    private final int Bad = 75;
+    private final int Perfect = 20;
+    private final int Good = 35;
+    private final int Okay = 60;
+    private final int Bad = 85;
     
     PinkNote pinkNote = new PinkNote();
     BlueNote blueNote = new BlueNote();
