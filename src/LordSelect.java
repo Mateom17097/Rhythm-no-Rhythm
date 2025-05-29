@@ -3,22 +3,29 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class SongSelect{
-	private Image forward; // backward, left, right; 	
+
+public class LordSelect{
+	private Image forward;
+	private Image backward;
+	private Image left;
+	private Image present;// backward, left, right; 	
 	private AffineTransform tx;
 	
-	int dir = 0; 					//0-forward, 1-backward, 2-left, 3-right
+	public int dir = 0; 					//0-forward, 1-backward, 2-left, 3-right
 	int width, height;				//collision detection
 	int x, y;						//position of the object
 	double vx, vy;					//movement variables
 	double scaleWidth = 4.96;		//change to scale image
 	double scaleHeight = 4.96; 		//change to scale image
 
-	public SongSelect() {
-		forward 	= getImage("/imgs/"+"songSelect.gif"); //load the image for Tree
+	public LordSelect() {
+		
+		forward 	= getImage("/imgs/"+"LordSelect.png"); //load the image for Tree
+	
 		
 		//width and height for hitbox
 		width = 0;
@@ -39,8 +46,9 @@ public class SongSelect{
 		
 	}
 	
+	
 	//2nd constructor - allow setting x and  y during construction
-	public SongSelect(int x, int y) {
+	public LordSelect(int x, int y) {
 		
 		//call the default constructor for all the normal stuff
 		this(); //invokes default constructor
@@ -70,9 +78,11 @@ public class SongSelect{
 			vy *= -1;
 			
 		}
-		g2.drawImage(forward, tx, null);
-			
-		//draw hitbox based on x,y, width, heigh
+		
+			g2.drawImage(forward, tx, null);
+		
+		
+		//draw hit box based on x,y, width, height
 		//for collision detection
 		if(Frame.debugging) {
 			//draw hitbox only if debugging
@@ -82,6 +92,7 @@ public class SongSelect{
 		
 	}
 	
+	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(scaleWidth, scaleHeight);
@@ -90,7 +101,7 @@ public class SongSelect{
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = SongSelect.class.getResource(path);
+			URL imageURL = LordSelect.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();

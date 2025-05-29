@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class SongSelect{
+public class downArrow{
 	private Image forward; // backward, left, right; 	
 	private AffineTransform tx;
 	
@@ -17,8 +17,8 @@ public class SongSelect{
 	double scaleWidth = 4.96;		//change to scale image
 	double scaleHeight = 4.96; 		//change to scale image
 
-	public SongSelect() {
-		forward 	= getImage("/imgs/"+"songSelect.gif"); //load the image for Tree
+	public downArrow() {
+		forward 	= getImage("/imgs/"+"downArrow.png"); //load the image for Tree
 		
 		//width and height for hitbox
 		width = 0;
@@ -40,7 +40,7 @@ public class SongSelect{
 	}
 	
 	//2nd constructor - allow setting x and  y during construction
-	public SongSelect(int x, int y) {
+	public downArrow(int x, int y) {
 		
 		//call the default constructor for all the normal stuff
 		this(); //invokes default constructor
@@ -90,7 +90,7 @@ public class SongSelect{
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = SongSelect.class.getResource(path);
+			URL imageURL = downArrow.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
