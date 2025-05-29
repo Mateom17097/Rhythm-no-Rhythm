@@ -14,6 +14,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     int combo = 0;
     Font myFont = new Font("Courier", Font.BOLD, 40);
    
+    private final int Perfect = 10;
+    private final int Good = 25;
+    private final int Okay = 50;
+    private final int Bad = 75;
+    
     PinkNote pinkNote = new PinkNote();
     BlueNote blueNote = new BlueNote();
     Hole hole = new Hole();
@@ -67,6 +72,25 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         }
     }
 
+    public String accuracyCalculator(int note, int target) {
+    	int acc = Math.abs(note - target);
+    	
+    	if(acc <= Perfect) {
+    		return "PERFECT";
+    	}else if(acc <= Good) {
+    		return "GOOD";
+    	}else if(acc <= Okay) {
+    		return "OKAY";
+    	}else if(acc <= Bad) {
+    		return "BAD";
+    	}else {
+    		return "MISS";
+    				
+    	}
+    	
+    }
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (pinkNote.missed) {
@@ -88,7 +112,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             state = STATE.SELECT;
             return;
         }
-
         if (state == STATE.SELECT && e.getKeyCode() == KeyEvent.VK_ENTER) {
             try {
                 titleScreenMusic.stop();
@@ -97,34 +120,53 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             }
             state = STATE.GAME;
         }
-
         if (state == STATE.GAME) {
             if (e.getKeyCode() == 70) { // F key
-                if (pinkNote.collided(hole)) {
-                    pinkNote.x = 920;
-                    System.out.println("Hit!");
-                    score++;
+                String accuracy = accuracyCalculator(pinkNote.x, hole.x);
+
+                if (accuracy.equals("Perfect")) {
+                    score += 300;
                     combo++;
-                    System.out.println("Score: " + score + " | Combo: " + combo);
-                } else {
-                    System.out.println("Miss!");
+                } else if (accuracy.equals("Good")) {
+                    score += 200;
+                    combo++;
+                } else if (accuracy.equals("Okay")) {
+                    score += 100;
+                    combo++;
+                } else if (accuracy.equals("Bad")) {
+                    score += 50;
                     combo = 0;
-                    System.out.println("Score: " + score + " | Combo: 0");
+                } else { 
+                    combo = 0;
                 }
+
+                System.out.println("Accuracy: " + accuracy);
+                System.out.println("Score: " + score + " | Combo: " + combo);
+                pinkNote.x = 920; 
             }
 
             if (e.getKeyCode() == 74) { // J key
-                if (blueNote.collided(hole2)) {
-                    blueNote.x = 0;
-                    System.out.println("Hit!");
-                    score++;
+                String accuracy = accuracyCalculator(blueNote.x, hole2.x);
+
+                if (accuracy.equals("Perfect")) {
+                    score += 300;
                     combo++;
-                    System.out.println("Score: " + score + " | Combo: " + combo);
-                } else {
-                    System.out.println("Miss!");
+                } else if (accuracy.equals("Good")) {
+                    score += 200;
+                    combo++;
+                } else if (accuracy.equals("Okay")) {
+                    score += 100;
+                    combo++;
+                } else if (accuracy.equals("Bad")) {
+                    score += 50;
                     combo = 0;
-                    System.out.println("Score: " + score + " | Combo: 0");
+                } else { // Miss
+                    combo = 0;
                 }
+
+                System.out.println("Accuracy: " + accuracy);
+                System.out.println("Score: " + score + " | Combo: " + combo);
+                blueNote.x = 0; // Reset note
             }
 
             if (e.getKeyCode() == 101) {
@@ -132,6 +174,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             }
         }
     }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {}
