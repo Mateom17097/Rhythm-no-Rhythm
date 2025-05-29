@@ -8,12 +8,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
 
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
-	
     int score = 0;
     int combo = 0;
     Font myFont = new Font("Courier", Font.BOLD, 40);
+   
     PinkNote pinkNote = new PinkNote();
     BlueNote blueNote = new BlueNote();
     Hole hole = new Hole();
@@ -21,18 +21,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     TitleCard titleCard = new TitleCard();
     StartScreen start = new StartScreen();
     EnterToStart enter = new EnterToStart();
-    SongSelect songSelect = new SongSelect();
-    
-    
-    //SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\Daft.wav", true);
 
     public int width = 1000;
     public int height = 1000;
 
     public static void main(String[] arg) {
         Frame f = new Frame();
-        
-    } 
+    }
 
     public Frame() {
         JFrame f = new JFrame("Rhythm no Rhythm");
@@ -50,93 +45,72 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         t.start();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
-        
     }
 
     @Override
     public void paint(Graphics g) {
         super.paintComponent(g);
         if (state == STATE.MENU) {
-        	
             start.paint(g);
             titleCard.paint(g);
             enter.paint(g);
-            g.setColor(Color.WHITE);
-            g.setFont(myFont);
-            
-           
         } else if (state == STATE.GAME) {
-   
             pinkNote.paint(g);
             blueNote.paint(g); 
             hole.paint(g);
             hole2.paint(g);
-            
-            
-            
-        } else if (state == STATE.SELECT) {
-        	songSelect.paint(g);
+
+            g.setColor(Color.WHITE);
+            g.setFont(myFont);
+            g.drawString("Score: " + score, 50, 50);
+            g.drawString("Combo: " + combo, 50, 100);
         }
     }
 
     @Override
-    public void mouseClicked(MouseEvent arg0) {}
+    public void actionPerformed(ActionEvent e) {
+        if (pinkNote.missed) {
+        	combo = 0;
+            pinkNote.missed = false;
+            System.out.println("Score: " + score + " | Combo: 0");
+        }else if(blueNote.missed) {
+        	combo = 0;
+        	blueNote.missed = false;
+        	System.out.println("Score: " + score + " | Combo: 0");
+        }
 
-    @Override
-    public void mouseEntered(MouseEvent arg0) {}
-
-    @Override
-    public void mouseExited(MouseEvent arg0) {}
-
-    @Override
-    public void mousePressed(MouseEvent m) {}
-
-    @Override
-    public void mouseReleased(MouseEvent arg0) {}
-
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
         repaint();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         if (state == STATE.MENU && e.getKeyCode() == KeyEvent.VK_ENTER) {
-	
             state = STATE.SELECT;
             return;
         }
-        if(state == STATE.SELECT && e.getKeyCode() == KeyEvent.VK_ENTER) {
-        	try {
+
+        if (state == STATE.SELECT && e.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
                 titleScreenMusic.stop();
-                }catch(Exception ex) {
-                	ex.printStackTrace();
-                }
-        	state = STATE.GAME;
-        }
-        
-        if(e.getKeyCode() == 101) {
-            	state = STATE.MENU;
-            	titleScreenMusic.play();
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-        
+            state = STATE.GAME;
+        }
+
         if (state == STATE.GAME) {
-  if (e.getKeyCode() == 70) { // F key
+            if (e.getKeyCode() == 70) { // F key
                 if (pinkNote.collided(hole)) {
                     pinkNote.x = 920;
                     System.out.println("Hit!");
                     score++;
-                    System.out.println("Score: " + score);
+                    combo++;
+                    System.out.println("Score: " + score + " | Combo: " + combo);
                 } else {
-                    System.out.println("Slow Down!");
-                    
+                    System.out.println("Miss!");
+                    combo = 0;
+                    System.out.println("Score: " + score + " | Combo: 0");
                 }
-                
-            }
-            
-            if(e.getKeyCode() == 101) {
-            	state = STATE.MENU;
-            	
             }
 
             if (e.getKeyCode() == 74) { // J key
@@ -144,19 +118,33 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                     blueNote.x = 0;
                     System.out.println("Hit!");
                     score++;
-                    System.out.println("Score: " + score);
+                    combo++;
+                    System.out.println("Score: " + score + " | Combo: " + combo);
                 } else {
-                    System.out.println("Slow Down!");
-                   
+                    System.out.println("Miss!");
+                    combo = 0;
+                    System.out.println("Score: " + score + " | Combo: 0");
                 }
+            }
+
+            if (e.getKeyCode() == 101) {
+                state = STATE.MENU;
             }
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent arg0) {}
-
+    public void mouseClicked(MouseEvent e) {}
     @Override
-    public void keyTyped(KeyEvent arg0) {}
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
+    @Override
+    public void mousePressed(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+    @Override
+    public void keyReleased(KeyEvent e) {}
+    @Override
+    public void keyTyped(KeyEvent e) {}
 }
-	
