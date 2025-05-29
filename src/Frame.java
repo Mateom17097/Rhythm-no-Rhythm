@@ -8,17 +8,23 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    
+    private boolean up;
+    private boolean down;
+    
+    private int dir;
 
     int score = 0;
     int combo = 0;
+
     Font myFont = new Font("Courier", Font.BOLD, 40);
-   
+
     private final int Perfect = 20;
     private final int Good = 35;
     private final int Okay = 60;
     private final int Bad = 85;
-    
+
     PinkNote pinkNote = new PinkNote();
     BlueNote blueNote = new BlueNote();
     Hole hole = new Hole();
@@ -26,6 +32,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     TitleCard titleCard = new TitleCard();
     StartScreen start = new StartScreen();
     EnterToStart enter = new EnterToStart();
+    SongSelect songSelect = new SongSelect();
+    BrazilSelect brazil = new BrazilSelect();
+    LordSelect lord = new LordSelect();
+    WeezerSelect weeze = new WeezerSelect();
+    upArrow upArrow = new upArrow();
+    downArrow downArrow = new downArrow();
+    defaultArrow defaultArrow = new defaultArrow();
 
     public int width = 1000;
     public int height = 1000;
@@ -39,7 +52,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         f.setSize(new Dimension(width, height));
         f.setBackground(Color.gray);
         f.add(this);
-        f.setResizable(false); 
+        f.setResizable(false);
         f.addMouseListener(this);
         f.addKeyListener(this);
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
@@ -59,9 +72,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             start.paint(g);
             titleCard.paint(g);
             enter.paint(g);
+            g.setColor(Color.WHITE);
+            g.setFont(myFont);
+
         } else if (state == STATE.GAME) {
             pinkNote.paint(g);
-            blueNote.paint(g); 
+            blueNote.paint(g);
             hole.paint(g);
             hole2.paint(g);
 
@@ -69,38 +85,54 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             g.setFont(myFont);
             g.drawString("Score: " + score, 50, 50);
             g.drawString("Combo: " + combo, 50, 100);
+
+        } else if (state == STATE.SELECT) {
+            songSelect.paint(g);
+
+            if (dir == 0) {
+                brazil.paint(g);
+            } else if (dir == 1) {
+                lord.paint(g);
+            } else {
+                weeze.paint(g);
+            }
+
+            if (up) {
+                upArrow.paint(g);
+            } else if (down) {
+                downArrow.paint(g);
+            } else {
+                defaultArrow.paint(g);
+            }
         }
     }
 
     public String accuracyCalculator(int note, int target) {
-    	int acc = Math.abs(note - target);
-    	
-    	if(acc <= Perfect) {
-    		return "PERFECT";
-    	}else if(acc <= Good) {
-    		return "GOOD";
-    	}else if(acc <= Okay) {
-    		return "OKAY";
-    	}else if(acc <= Bad) {
-    		return "BAD";
-    	}else {
-    		return "MISS";
-    				
-    	}
-    	
+        int acc = Math.abs(note - target);
+
+        if (acc <= Perfect) {
+            return "Perfect";
+        } else if (acc <= Good) {
+            return "Good";
+        } else if (acc <= Okay) {
+            return "Okay";
+        } else if (acc <= Bad) {
+            return "Bad";
+        } else {
+            return "Miss";
+        }
     }
-    
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (pinkNote.missed) {
-        	combo = 0;
+            combo = 0;
             pinkNote.missed = false;
             System.out.println("Score: " + score + " | Combo: 0");
-        }else if(blueNote.missed) {
-        	combo = 0;
-        	blueNote.missed = false;
-        	System.out.println("Score: " + score + " | Combo: 0");
+        } else if (blueNote.missed) {
+            combo = 0;
+            blueNote.missed = false;
+            System.out.println("Score: " + score + " | Combo: 0");
         }
 
         repaint();
@@ -120,6 +152,25 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             }
             state = STATE.GAME;
         }
+        if (e.getKeyCode() == 101) { // 'e' key, used for returning to menu
+            state = STATE.MENU;
+            titleScreenMusic.play();
+        }
+
+        if (state == STATE.SELECT) {
+            if (e.getKeyCode() == 40) { // Down arrow
+                down = true;
+                if (dir < 2) {
+                    dir++;
+                }
+            } else if (e.getKeyCode() == 38) { // Up arrow
+                up = true;
+                if (dir > 0) {
+                    dir--;
+                }
+            }
+        }
+
         if (state == STATE.GAME) {
             if (e.getKeyCode() == 70) { // F key
                 String accuracy = accuracyCalculator(pinkNote.x, hole.x);
@@ -136,13 +187,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 } else if (accuracy.equals("Bad")) {
                     score += 50;
                     combo = 0;
-                } else { 
+                } else {
                     combo = 0;
                 }
 
                 System.out.println("Accuracy: " + accuracy);
                 System.out.println("Score: " + score + " | Combo: " + combo);
-                pinkNote.x = 920; 
+                pinkNote.x = 920;
             }
 
             if (e.getKeyCode() == 74) { // J key
@@ -160,21 +211,27 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 } else if (accuracy.equals("Bad")) {
                     score += 50;
                     combo = 0;
-                } else { // Miss
+                } else {
                     combo = 0;
                 }
 
                 System.out.println("Accuracy: " + accuracy);
                 System.out.println("Score: " + score + " | Combo: " + combo);
-                blueNote.x = 0; // Reset note
-            }
-
-            if (e.getKeyCode() == 101) {
-                state = STATE.MENU;
+                blueNote.x = 0;
             }
         }
     }
 
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (state == STATE.SELECT) {
+            if (e.getKeyCode() == 40) { // Down arrow
+                down = false;
+            } else if (e.getKeyCode() == 38) { // Up arrow
+                up = false;
+            }
+        }
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {}
@@ -186,8 +243,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     public void mousePressed(MouseEvent e) {}
     @Override
     public void mouseReleased(MouseEvent e) {}
-    @Override
-    public void keyReleased(KeyEvent e) {}
     @Override
     public void keyTyped(KeyEvent e) {}
 }
