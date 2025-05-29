@@ -17,7 +17,7 @@ public class BlueNote{
 	int vx, vy;						//movement variables
 	double scaleWidth = 0.07;		//change to scale image
 	double scaleHeight = 0.03; 		//change to scale image
-
+	public boolean missed = false;
 	public BlueNote() {
 		forward 	= getImage("/imgs/"+"Baabu.png"); //load the image for Tree
 
@@ -75,9 +75,11 @@ public class BlueNote{
 		
 		if(x >= 920 ) {
 			x = 0;
+			if (!missed) {
+				missed = true;
 			System.out.println("MISS!");
 		}
-		
+		}
 		
 		
 		g2.drawImage(forward, tx, null);
