@@ -18,7 +18,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     int score = 0;
     int combo = 0;
 
-    Font myFont = new Font("Courier", Font.BOLD, 40);
+    Font myFont = new Font("Courier", Font.BOLD, 30);
 
     private final int Perfect = 20;
     private final int Good = 35;
@@ -89,8 +89,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
             g.setColor(Color.WHITE);
             g.setFont(myFont);
-            g.drawString("Score: " + score, 50, 50);
-            g.drawString("Combo: " + combo, 50, 100);
+            
+            g.drawString("Score: " + score, 15, 50);
+            g.drawString("Combo: " + combo, 15, 85);
 
         } else if (state == STATE.SELECT) {
             songSelect.paint(g);
