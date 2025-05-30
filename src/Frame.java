@@ -8,7 +8,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\README.md\\src\\ATW.wav", true);
     
     private boolean up;
     private boolean down;
@@ -39,7 +39,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     upArrow upArrow = new upArrow();
     downArrow downArrow = new downArrow();
     defaultArrow defaultArrow = new defaultArrow();
-
+    GameBackground game = new GameBackground();
+    LeftBelt leftBelt = new LeftBelt();
+    RightBelt rightBelt = new RightBelt();
+    
     public int width = 1000;
     public int height = 1000;
 
@@ -76,6 +79,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             g.setFont(myFont);
 
         } else if (state == STATE.GAME) {
+        	game.paint(g);
+        	leftBelt.paint(g);
+        	rightBelt.paint(g);
             pinkNote.paint(g);
             blueNote.paint(g);
             hole.paint(g);
@@ -155,6 +161,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         if (e.getKeyCode() == 101) { // 'e' key, used for returning to menu
             state = STATE.MENU;
             titleScreenMusic.play();
+            score = 0;
+            dir = 0;
+            combo = 0;
         }
 
         if (state == STATE.SELECT) {
