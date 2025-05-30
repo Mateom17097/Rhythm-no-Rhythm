@@ -115,8 +115,8 @@ public class Hole{
 		height = 80;
 		
 		//used for placement on the JFrame
-		x = 100;
-		y = 500;
+		x = 75;
+		y = 700;
 		
 		//if your movement will not be "hopping" base
 		vx = 0;
