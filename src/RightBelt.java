@@ -15,7 +15,7 @@ public class RightBelt{
 	int width, height;				//collision detection
 	int x, y;						//position of the object
 	int vx, vy;						//movement variables
-	double scaleWidth = 4.96;	//change to scale image
+	double scaleWidth = 5.5;	//change to scale image
 	double scaleHeight = 4.96; 		//change to scale image
 	public Image getForward() {
 		return forward;
@@ -115,7 +115,7 @@ public class RightBelt{
 		height = 80;
 		
 		//used for placement on the JFrame
-		x = 0;
+		x = -3;
 		y = 0;
 		
 		//if your movement will not be "hopping" base
