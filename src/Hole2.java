@@ -115,8 +115,8 @@ public class Hole2{
 		height = 80;
 		
 		//used for placement on the JFrame
-		x = 820;
-		y = 500;
+		x = 840;
+		y = 510;
 		
 		//if your movement will not be "hopping" base
 		vx = 0;
@@ -129,39 +129,7 @@ public class Hole2{
 		
 	}
 	
-	/*
-	 * Collision detection with main character class
-	 
-	public boolean collided(Ghost character) {
-		
-		//represent each object as a rectangle
-		//then check if they are intersecting
-		Rectangle main = new Rectangle(
-			character.getX(),
-			character.getY(),
-			character.getWidth(),
-			character.getWidth()
-			);
-		
-		Rectangle thisObject = new Rectangle(x, y, width, height);
-		
-		//user built-in method to check intersection (collision)
-		return main.intersects(thisObject);
-	}
-	
-	//2nd constructor - allow setting x and  y during construction
-	public Bat(int x, int y) {
-		
-		//call the default constructor for all the normal stuff
-		this(); //invokes default constructor
-		
-		// do the specific task for THIS constructor
-		this.x = x;
-		this.y = y;
-		
-		
-	}
-	 	*/
+
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
