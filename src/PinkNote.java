@@ -15,21 +15,21 @@ public class PinkNote {
 	int width, height;
 	public int x, y;
 	int vx, vy;
-	double scaleWidth = 0.07;
-	double scaleHeight = 0.03;
+	double scaleWidth = 3.2;
+	double scaleHeight = 5.4;
 
 	public boolean missed = false;
 
 	public PinkNote() {
-		forward = getImage("/imgs/" + "Baabu.png");
+		forward = getImage("/imgs/" + "pinkNote.png");
 
 		width = 80;
 		height = 80;
 
 		x = 1000;
-		y = 710;
+		y = 720;
 
-		vx = -30;
+		vx = -15;
 		vy = 0;
 
 		tx = AffineTransform.getTranslateInstance(0, 0);

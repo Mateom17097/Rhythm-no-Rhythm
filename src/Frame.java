@@ -8,7 +8,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\README.md\\src\\ATW.wav", true);
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
     
     private boolean up;
     private boolean down;
@@ -24,7 +24,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private final int Good = 35;
     private final int Okay = 60;
     private final int Bad = 85;
-
+    
+    kkSliders kk = new kkSliders();
     PinkNote pinkNote = new PinkNote();
     BlueNote blueNote = new BlueNote();
     Hole hole = new Hole();
@@ -86,7 +87,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             blueNote.paint(g);
             hole.paint(g);
             hole2.paint(g);
-
+            kk.paint(g);
             g.setColor(Color.WHITE);
             g.setFont(myFont);
             

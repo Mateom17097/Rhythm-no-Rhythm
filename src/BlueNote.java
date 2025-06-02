@@ -15,11 +15,11 @@ public class BlueNote{
 	int width, height;				//collision detection
 	int x, y;						//position of the object
 	int vx, vy;						//movement variables
-	double scaleWidth = 0.07;		//change to scale image
-	double scaleHeight = 0.03; 		//change to scale image
+	double scaleWidth = 3.2;		//change to scale image
+	double scaleHeight = 5.4; 		//change to scale image
 	public boolean missed = false;
 	public BlueNote() {
-		forward 	= getImage("/imgs/"+"Baabu.png"); //load the image for Tree
+		forward 	= getImage("/imgs/"+"blueNote.png"); //load the image for Tree
 
 		//width and height for hitbox
 		width = 80;
@@ -27,10 +27,10 @@ public class BlueNote{
 		
 		//used for placement on the JFrame
 		x = -80;
-		y = 510;
+		y = 520;
 		
 		//if your movement will not be "hopping" base
-		vx = 30;
+		vx = 15;
 		vy = 0;
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
