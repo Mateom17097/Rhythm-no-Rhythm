@@ -27,7 +27,7 @@ public class BlueNote{
 		
 		//used for placement on the JFrame
 		x = -80;
-		y = 420;
+		y = 510;
 		
 		//if your movement will not be "hopping" base
 		vx = 30;
