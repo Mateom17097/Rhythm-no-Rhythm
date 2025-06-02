@@ -27,7 +27,7 @@ public class PinkNote {
 		height = 80;
 
 		x = 1000;
-		y = 500;
+		y = 710;
 
 		vx = -30;
 		vy = 0;
