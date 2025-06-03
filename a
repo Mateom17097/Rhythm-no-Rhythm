@@ -1,4 +1,4 @@
-when I run this code the audio files that I have loaded start playing by themselves but I don't want 3 of them running until I get to the game state and the song that plays will depend on the variable dir:
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
