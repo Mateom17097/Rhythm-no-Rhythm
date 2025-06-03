@@ -20,13 +20,13 @@ public class PinkNote {
 
 	public boolean missed = false;
 
-	public PinkNote() {
+	public PinkNote( int xx) {
 		forward = getImage("/imgs/" + "pinkNote.png");
 
 		width = 80;
 		height = 80;
 
-		x = 1000;
+		x = xx;
 		y = 720;
 
 		vx = -15;
