@@ -12,11 +12,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
     SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
     SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
-    
-    
+
     private boolean up;
     private boolean down;
-    
+
     private int dir;
 
     int score = 0;
@@ -33,7 +32,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private long accuracyTimestamp = 0;
     private final int accuracyDisplayDuration = 1000; // milliseconds
     private Color accuracyColor = Color.WHITE;
-    
+
     kkSliders kk = new kkSliders();
     PinkNote pinkNote = new PinkNote();
     BlueNote blueNote = new BlueNote();
@@ -52,7 +51,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     GameBackground game = new GameBackground();
     LeftBelt leftBelt = new LeftBelt();
     RightBelt rightBelt = new RightBelt();
-    
+
     public int width = 1000;
     public int height = 1000;
 
@@ -76,11 +75,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         t.start();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
-       
     }
 
     @Override
-    public void paint(Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (state == STATE.MENU) {
             start.paint(g);
@@ -88,36 +86,26 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             enter.paint(g);
             g.setColor(Color.WHITE);
             g.setFont(myFont);
-
         } else if (state == STATE.GAME) {
-        	
-        	
-        	
-        	game.paint(g);
-        	leftBelt.paint(g);
-        	rightBelt.paint(g);
+            game.paint(g);
+            leftBelt.paint(g);
+            rightBelt.paint(g);
             pinkNote.paint(g);
             blueNote.paint(g);
             hole.paint(g);
             hole2.paint(g);
             kk.paint(g);
-            
-           
-            
-            
+
             g.setColor(Color.WHITE);
             g.setFont(myFont);
-            
             g.drawString("Score: " + score, 15, 50);
             g.drawString("Combo: " + combo, 15, 85);
 
-            
             if (!currentAccuracy.equals("") && System.currentTimeMillis() - accuracyTimestamp < accuracyDisplayDuration) {
                 g.setColor(accuracyColor);
                 g.setFont(new Font("Courier", Font.BOLD, 60));
                 g.drawString(currentAccuracy, 750, 250);
             }
-
         } else if (state == STATE.SELECT) {
             songSelect.paint(g);
 
@@ -179,13 +167,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         if (state == STATE.SELECT && e.getKeyCode() == KeyEvent.VK_ENTER) {
             try {
                 titleScreenMusic.stop();
-               
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
             state = STATE.GAME;
         }
-        if (e.getKeyCode() == 101) { // 'e' key, used for returning to menu
+        if (e.getKeyCode() == 101) { // 'e' key to return to menu
             state = STATE.MENU;
             titleScreenMusic.play();
             score = 0;
@@ -194,32 +181,29 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         }
 
         if (state == STATE.SELECT) {
-            if (e.getKeyCode() == 40) { // Down arrow
+            if (e.getKeyCode() == 40) {
                 down = true;
-                if (dir < 2) {
-                    dir++;
-                }
-            } else if (e.getKeyCode() == 38) { // Up arrow
+                if (dir < 2) dir++;
+            } else if (e.getKeyCode() == 38) {
                 up = true;
-                if (dir > 0) {
-                    dir--;
-                }
+                if (dir > 0) dir--;
             }
-            
-            if(dir == 0) {
-            	brazilMusic.play();
-            }else if (dir == 1) {
-            	lordMusic.play();
-            }else{
-            	weezeMusic.play();
+
+            if (dir == 0) {
+                brazilMusic.play();
+            } else if (dir == 1) {
+                lordMusic.play();
+            } else {
+                weezeMusic.play();
             }
-            
-            
         }
 
         if (state == STATE.GAME) {
-            if (e.getKeyCode() == 70) { // F key
+            if (e.getKeyCode() == 70) {
                 String accuracy = accuracyCalculator(pinkNote.x, hole.x);
+
+                currentAccuracy = accuracy;
+                accuracyTimestamp = System.currentTimeMillis();
 
                 if (accuracy.equals("Perfect")) {
                     score += 300;
@@ -247,26 +231,31 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 pinkNote.x = 920;
             }
 
-            if (e.getKeyCode() == 74) { // J key
+            if (e.getKeyCode() == 74) {
                 String accuracy = accuracyCalculator(blueNote.x, hole2.x);
+
                 currentAccuracy = accuracy;
                 accuracyTimestamp = System.currentTimeMillis();
-
 
                 if (accuracy.equals("Perfect")) {
                     score += 300;
                     combo++;
+                    accuracyColor = Color.GREEN;
                 } else if (accuracy.equals("Good")) {
                     score += 200;
                     combo++;
+                    accuracyColor = Color.CYAN;
                 } else if (accuracy.equals("Okay")) {
                     score += 100;
                     combo++;
+                    accuracyColor = Color.YELLOW;
                 } else if (accuracy.equals("Bad")) {
                     score += 50;
                     combo = 0;
+                    accuracyColor = Color.RED;
                 } else {
                     combo = 0;
+                    accuracyColor = Color.GRAY;
                 }
 
                 System.out.println("Accuracy: " + accuracy);
@@ -279,19 +268,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     public void keyReleased(KeyEvent e) {
         if (state == STATE.SELECT) {
-            if (e.getKeyCode() == 40) { // Down arrow
-                down = false;
-            } else if (e.getKeyCode() == 38) { // Up arrow
-                up = false;
-            }
+            if (e.getKeyCode() == 40) down = false;
+            else if (e.getKeyCode() == 38) up = false;
         }
     }
 
-    @Override
+    @Override 
     public void mouseClicked(MouseEvent e) {}
-    @Override
+    @Override 
     public void mouseEntered(MouseEvent e) {}
-    @Override
+    @Override 
     public void mouseExited(MouseEvent e) {}
     @Override
     public void mousePressed(MouseEvent e) {}
@@ -300,3 +286,4 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     public void keyTyped(KeyEvent e) {}
 }
+
