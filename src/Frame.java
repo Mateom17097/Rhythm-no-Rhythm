@@ -28,6 +28,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private final int Good = 35;
     private final int Okay = 60;
     private final int Bad = 85;
+
+    private String currentAccuracy = "";
+    private long accuracyTimestamp = 0;
+    private final int accuracyDisplayDuration = 1000; // milliseconds
+    private Color accuracyColor = Color.WHITE;
     
     kkSliders kk = new kkSliders();
     PinkNote pinkNote = new PinkNote();
@@ -105,6 +110,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             
             g.drawString("Score: " + score, 15, 50);
             g.drawString("Combo: " + combo, 15, 85);
+
+            
+            if (!currentAccuracy.equals("") && System.currentTimeMillis() - accuracyTimestamp < accuracyDisplayDuration) {
+                g.setColor(accuracyColor);
+                g.setFont(new Font("Courier", Font.BOLD, 60));
+                g.drawString(currentAccuracy, 750, 250);
+            }
 
         } else if (state == STATE.SELECT) {
             songSelect.paint(g);
@@ -212,17 +224,22 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 if (accuracy.equals("Perfect")) {
                     score += 300;
                     combo++;
+                    accuracyColor = Color.GREEN;
                 } else if (accuracy.equals("Good")) {
                     score += 200;
                     combo++;
+                    accuracyColor = Color.CYAN;
                 } else if (accuracy.equals("Okay")) {
                     score += 100;
                     combo++;
+                    accuracyColor = Color.YELLOW;
                 } else if (accuracy.equals("Bad")) {
                     score += 50;
                     combo = 0;
+                    accuracyColor = Color.RED;
                 } else {
                     combo = 0;
+                    accuracyColor = Color.GRAY;
                 }
 
                 System.out.println("Accuracy: " + accuracy);
