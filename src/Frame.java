@@ -9,6 +9,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private STATE state = STATE.MENU;
 
     SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
+    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
+    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
+    
     
     private boolean up;
     private boolean down;
@@ -67,6 +71,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         t.start();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+       
     }
 
     @Override
@@ -80,6 +85,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             g.setFont(myFont);
 
         } else if (state == STATE.GAME) {
+        	
+        	
+        	
         	game.paint(g);
         	leftBelt.paint(g);
         	rightBelt.paint(g);
@@ -88,6 +96,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             hole.paint(g);
             hole2.paint(g);
             kk.paint(g);
+            
+           
+            
+            
             g.setColor(Color.WHITE);
             g.setFont(myFont);
             
@@ -155,6 +167,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         if (state == STATE.SELECT && e.getKeyCode() == KeyEvent.VK_ENTER) {
             try {
                 titleScreenMusic.stop();
+               
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -180,6 +193,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                     dir--;
                 }
             }
+            
+            if(dir == 0) {
+            	brazilMusic.play();
+            }else if (dir == 1) {
+            	lordMusic.play();
+            }else{
+            	weezeMusic.play();
+            }
+            
+            
         }
 
         if (state == STATE.GAME) {
