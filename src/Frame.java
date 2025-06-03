@@ -171,6 +171,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 ex.printStackTrace();
             }
             state = STATE.GAME;
+            if (dir == 0) {
+                brazilMusic.play();
+            } else if (dir == 1) {
+                lordMusic.play();
+            } else if (dir == 2){
+                weezeMusic.play();
+            }
         }
         if (e.getKeyCode() == 101) { // 'e' key to return to menu
             state = STATE.MENU;
@@ -183,19 +190,17 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         if (state == STATE.SELECT) {
             if (e.getKeyCode() == 40) {
                 down = true;
-                if (dir < 2) dir++;
+                if (dir < 2) {
+                	dir++;
+                }
             } else if (e.getKeyCode() == 38) {
                 up = true;
-                if (dir > 0) dir--;
+                if (dir > 0) {
+                	dir--;
+                }
             }
 
-            if (dir == 0) {
-                brazilMusic.play();
-            } else if (dir == 1) {
-                lordMusic.play();
-            } else {
-                weezeMusic.play();
-            }
+            
         }
 
         if (state == STATE.GAME) {
@@ -286,4 +291,3 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     public void keyTyped(KeyEvent e) {}
 }
-
