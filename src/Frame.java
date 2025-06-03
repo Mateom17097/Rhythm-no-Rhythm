@@ -249,6 +249,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
             if (e.getKeyCode() == 74) { // J key
                 String accuracy = accuracyCalculator(blueNote.x, hole2.x);
+                currentAccuracy = accuracy;
+                accuracyTimestamp = System.currentTimeMillis();
+
 
                 if (accuracy.equals("Perfect")) {
                     score += 300;
