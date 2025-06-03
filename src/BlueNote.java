@@ -18,7 +18,7 @@ public class BlueNote{
 	double scaleWidth = 3.2;		//change to scale image
 	double scaleHeight = 5.4; 		//change to scale image
 	public boolean missed = false;
-	public BlueNote() {
+	public BlueNote( int xx) {
 		forward 	= getImage("/imgs/"+"blueNote.png"); //load the image for Tree
 
 		//width and height for hitbox
@@ -26,7 +26,7 @@ public class BlueNote{
 		height = 80;
 		
 		//used for placement on the JFrame
-		x = -80;
+		x = xx;
 		y = 520;
 		
 		//if your movement will not be "hopping" base
