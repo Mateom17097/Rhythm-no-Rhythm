@@ -10,10 +10,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("D:\\Eclipse IDE\\Code\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
-    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("D:\\Eclipse IDE\\Code\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
-    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("D:\\Eclipse IDE\\Code\\Rhythm-no-Rhythm\\src\\lord.wav", false);
-    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("D:\\Eclipse IDE\\Code\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
+    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
+    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
 
     private boolean up;
     private boolean down;
@@ -159,12 +159,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         if (state == STATE.MENU) {
             start.paint(g);
             titleCard.paint(g);
             enter.paint(g);
+
             g.setColor(Color.WHITE);
             g.setFont(myFont);
+            // Menu stuff here
+
         } else if (state == STATE.GAME) {
             game.paint(g);
             leftBelt.paint(g);
@@ -183,6 +187,42 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 g.setFont(new Font("Courier", Font.BOLD, 60));
                 g.drawString(currentAccuracy, 750, 250);
             }
+
+            if (dir == 0) {
+                for (BlueNote obj : brazilBlues) {
+                    if (!obj.isHit) {
+                        obj.paint(g);
+                    }
+                }
+                for (PinkNote obj : brazilPinks) {
+                    if (!obj.isHit) {
+                        obj.paint(g);
+                    }
+                }
+            } else if (dir == 1) {
+                for (BlueNote obj : lordBlues) {
+                    if (!obj.isHit) {
+                        obj.paint(g);
+                    }
+                }
+                for (PinkNote obj : lordPinks) {
+                    if (!obj.isHit) {
+                        obj.paint(g);
+                    }
+                }
+            } else {
+                for (BlueNote obj : weezeBlues) {
+                    if (!obj.isHit) {
+                        obj.paint(g);
+                    }
+                }
+                for (PinkNote obj : weezePinks) {
+                    if (!obj.isHit) {
+                        obj.paint(g);
+                    }
+                }
+            }
+
         } else if (state == STATE.SELECT) {
             songSelect.paint(g);
 
@@ -201,49 +241,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             } else {
                 defaultArrow.paint(g);
             }
-        }
-        
-        if (state == STATE.GAME) {
-            if (dir == 0) {
-                for (BlueNote obj : brazilBlues) {
-                	if (!obj.isHit) {
-                		obj.paint(g);
-                	}
-                }
-                for (PinkNote obj : brazilPinks) {
-                	if (!obj.isHit) {
-                		obj.paint(g);
-                	}
-                }
-            } else if (dir == 1) {
-                for (BlueNote obj : lordBlues) {
-                	if (!obj.isHit) {
-                		obj.paint(g);
-                	}
-                }
-                for (PinkNote obj : lordPinks) {
-                	if (!obj.isHit) {
-                		obj.paint(g);
-                	}
-                }
-            } else {
-                for (BlueNote obj : weezeBlues) {
-                	if (!obj.isHit) {
-                		obj.paint(g);
-                	}
-                }
-                for (PinkNote obj : weezePinks) {
-                	if (!obj.isHit) {
-                		obj.paint(g);
-                	}
-                }
-            }
-        }
 
-        
-        
+           
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Courier", Font.PLAIN, 20));
+            
+            String controlsText = "CONTROLS: F = Pink Notes | J = Blue Notes | UP/DOWN = Navigate | ENTER = Confirm";
+            int stringWidth = g.getFontMetrics().stringWidth(controlsText);
+            int x = ((width - stringWidth) / 2) + 25;   
+            int y = height - 40;  
+            
+            g.drawString(controlsText, x, y);
+        }
     }
-
     public String accuracyCalculator(int note, int target) {
         int acc = Math.abs(note - target);
 
