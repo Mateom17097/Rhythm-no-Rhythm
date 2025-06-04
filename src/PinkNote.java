@@ -57,7 +57,7 @@ public class PinkNote {
 		init(x, y);
 
 		
-		if (x <= 0 && !missed && !isHit && x > -100) { 
+		if (x <= 105 && !missed && !isHit && x > -100) { 
 		    missed = true;
 		    System.out.println("MISS!");
 		    x = -500;

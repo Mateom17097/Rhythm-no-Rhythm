@@ -75,7 +75,7 @@ public class BlueNote{
 		
 		init(x,y);
 		
-		if (x >= 920 && !missed && !isHit && x < 1500) {
+		if (x >= 800 && !missed && !isHit && x < 1500) {
 		    missed = true; 
 		    System.out.println("MISS!");
 		    x = 1600;

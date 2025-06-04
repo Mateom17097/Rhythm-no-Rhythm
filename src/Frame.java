@@ -89,23 +89,62 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 
         //BRAZIL NOTES
-            brazilBlues.add(new BlueNote(160));
-            brazilBlues.add(new BlueNote(0));
-            brazilPinks.add(new PinkNote(720));
-            brazilPinks.add(new PinkNote(880));
-
+            brazilBlues.add(new BlueNote(-1040));  //Base 0
+            brazilPinks.add(new PinkNote(2220));//Base 1000
+            brazilPinks.add(new PinkNote(2380));
+            brazilPinks.add(new PinkNote(2540));
+            brazilPinks.add(new PinkNote(2880));
+            brazilBlues.add(new BlueNote(-2320));
+            brazilBlues.add(new BlueNote(-2480));
+            brazilPinks.add(new PinkNote(3760));
+            brazilPinks.add(new PinkNote(4060));
             
+            brazilPinks.add(new PinkNote(4540));
+            brazilBlues.add(new BlueNote(-4000));
+            brazilBlues.add(new BlueNote(-4160));
+            brazilBlues.add(new BlueNote(-4320));
+            brazilBlues.add(new BlueNote(-4660));
+            brazilPinks.add(new PinkNote(5860));
+            brazilPinks.add(new PinkNote(6020));
+            brazilBlues.add(new BlueNote(-5500));
+            brazilBlues.add(new BlueNote(-5800));
+            
+            brazilBlues.add(new BlueNote(-6280));
+            brazilPinks.add(new PinkNote(7480));
+            brazilBlues.add(new BlueNote(-6740));
+            brazilBlues.add(new BlueNote(-6900));
+            brazilPinks.add(new PinkNote(8200));
+            brazilBlues.add(new BlueNote(-7460));
+            brazilPinks.add(new PinkNote(8600));
+            brazilBlues.add(new BlueNote(-7700));
+            brazilPinks.add(new PinkNote(8760));
+            brazilBlues.add(new BlueNote(-7860));
+            brazilPinks.add(new PinkNote(8960));
+            brazilPinks.add(new PinkNote(9140));
+            brazilBlues.add(new BlueNote(-8260));
+            brazilPinks.add(new PinkNote(9280));
+            brazilBlues.add(new BlueNote(-8400));
+            brazilPinks.add(new PinkNote(9380));
+            brazilBlues.add(new BlueNote(-8620));
+            brazilPinks.add(new PinkNote(9700));
+            
+            /*
+            
+            brazilBlues.add(new BlueNote(-1040));
+            brazilBlues.add(new BlueNote(-1040));
+           
+            */
+           
         //LORD NOTES
-            lordBlues.add(new BlueNote(720));
-            lordPinks.add(new PinkNote(720));
+            lordBlues.add(new BlueNote(0));
+            lordPinks.add(new PinkNote(920));
 
             
         //WEEZE NOTES
-            weezeBlues.add(new BlueNote(720));
-            weezePinks.add(new PinkNote(720));
+            weezeBlues.add(new BlueNote(0));
+            weezePinks.add(new PinkNote(920));
 
 
-        
         Timer t = new Timer(16, this);
         t.start();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,8 +169,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             game.paint(g);
             leftBelt.paint(g);
             rightBelt.paint(g);
-            //pinkNote.paint(g);
-           // blueNote.paint(g);
             hole.paint(g);
             hole2.paint(g);
             kk.paint(g);
@@ -336,7 +373,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
         if (state == STATE.GAME) {
             if (e.getKeyCode() == 70) {
-            	
+            	if(debugging) {
+            	System.out.println(hole.getVx());
+            	}
             	 ArrayList<PinkNote> activeNotes = dir == 0 ? brazilPinks : dir == 1 ? lordPinks : weezePinks;
             	    int targetX = hole.x;
 
@@ -366,7 +405,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             	            case "Okay":
             	                score += 100; combo++; accuracyColor = Color.YELLOW; break;
             	            case "Bad":
-            	                score += 50; combo = 0; accuracyColor = Color.RED; break;
+            	                score += 50; combo++; accuracyColor = Color.RED; break;
             	            case "Miss":
             	                combo = 0; accuracyColor = Color.GRAY; break;
             	        }
@@ -378,8 +417,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             }
 
             if (e.getKeyCode() == 74) {
-            	
-            	
+            	if(debugging) {
+            		System.out.println(hole2.getVx());
+            	}
             	    ArrayList<BlueNote> activeNotes = dir == 0 ? brazilBlues : dir == 1 ? lordBlues : weezeBlues;
             	    int targetX = hole2.x;
 
@@ -409,7 +449,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             	            case "Okay":
             	                score += 100; combo++; accuracyColor = Color.YELLOW; break;
             	            case "Bad":
-            	                score += 50; combo = 0; accuracyColor = Color.RED; break;
+            	                score += 50; combo++; accuracyColor = Color.RED; break;
             	            case "Miss":
             	                combo = 0; accuracyColor = Color.GRAY; break;
             	        }

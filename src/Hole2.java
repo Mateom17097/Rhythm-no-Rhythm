@@ -119,7 +119,7 @@ public class Hole2{
 		y = 520;
 		
 		//if your movement will not be "hopping" base
-		vx = 0;
+		vx = 760;
 		vy = 0;
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
@@ -133,10 +133,9 @@ public class Hole2{
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-		
+		vx = vx - 20;
 		//update x and y if using vx, vy variables
-		x += vx;
-		y += vy;	
+		
 		
 		init(x,y);
 		
