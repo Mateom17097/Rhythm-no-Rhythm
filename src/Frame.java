@@ -10,10 +10,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
-    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
-    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
-    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
+    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
+    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
 
     private boolean up;
     private boolean down;
@@ -246,7 +246,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             g.setColor(Color.WHITE);
             g.setFont(new Font("Courier", Font.PLAIN, 20));
             
-            String controlsText = "CONTROLS: F = Pink Notes | J = Blue Notes | UP/DOWN = Navigate | ENTER = Confirm";
+            String controlsText = "CONTROLS: F = Pink Notes | J = Blue Notes | ENTER = Confirm";
             int stringWidth = g.getFontMetrics().stringWidth(controlsText);
             int x = ((width - stringWidth) / 2) + 25;   
             int y = height - 40;  
