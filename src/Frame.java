@@ -35,7 +35,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private final int accuracyDisplayDuration = 1000; // milliseconds
     private Color accuracyColor = Color.WHITE;
 
-    kkSliders kk = new kkSliders();
+    kkSliders kk = new kkSliders(); 
   //  PinkNote pinkNote = new PinkNote(1000);
    // BlueNote blueNote = new BlueNote(-80);
     Hole hole = new Hole();
