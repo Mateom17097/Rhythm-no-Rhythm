@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
@@ -8,10 +10,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
-    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
-    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
-    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("C:\\Users\\1917097\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("D:\\Eclipse IDE\\Code\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("D:\\Eclipse IDE\\Code\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
+    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("D:\\Eclipse IDE\\Code\\Rhythm-no-Rhythm\\src\\lord.wav", false);
+    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("D:\\Eclipse IDE\\Code\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
 
     private boolean up;
     private boolean down;
@@ -52,20 +54,25 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     LeftBelt leftBelt = new LeftBelt();
     RightBelt rightBelt = new RightBelt();
     
-    BlueNote[] brazilBlues = new BlueNote[50];
-    PinkNote[] brazilPinks = new PinkNote[50];
+    ArrayList<BlueNote> brazilBlues = new ArrayList<>();
+    ArrayList<PinkNote> brazilPinks = new ArrayList<>();
     
-    BlueNote[] lordBlues = new BlueNote[50];
-    PinkNote[] lordPinks = new PinkNote[50];
+    ArrayList<BlueNote> lordBlues = new ArrayList<>();
+    ArrayList<PinkNote> lordPinks = new ArrayList<>();
     
-    BlueNote[] weezeBlues = new BlueNote[50];
-    PinkNote[] weezePinks = new PinkNote[50];
+    ArrayList<BlueNote> weezeBlues = new ArrayList<>();
+    ArrayList<PinkNote> weezePinks = new ArrayList<>();
+
+    
+    
+    
     
     public int width = 1000;
     public int height = 1000;
 
     public static void main(String[] arg) {
         Frame f = new Frame();
+        
     }
 
     public Frame() {
@@ -80,10 +87,34 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 new ImageIcon("torch.png").getImage(),
                 new Point(0, 0), "custom cursor"));
 
+
+        //BRAZIL NOTES
+            brazilBlues.add(new BlueNote(160));
+            brazilBlues.add(new BlueNote(0));
+            brazilPinks.add(new PinkNote(720));
+            brazilPinks.add(new PinkNote(880));
+
+            
+        //LORD NOTES
+            lordBlues.add(new BlueNote(720));
+            lordPinks.add(new PinkNote(720));
+
+            
+        //WEEZE NOTES
+            weezeBlues.add(new BlueNote(720));
+            weezePinks.add(new PinkNote(720));
+
+
+        
         Timer t = new Timer(16, this);
         t.start();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+        
+        
+      
+        
+        
     }
 
     @Override
@@ -135,30 +166,43 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             }
         }
         
-        if(state == STATE.GAME) {
-        	 if (dir == 0) {
-        		for(BlueNote obj : brazilBlues) {
-        			obj.paint(g);
-        		 }
-        		for(PinkNote obj : brazilPinks) {
-    				obj.paint(g);
-        		 }
-             } else if (dir == 1) {
-            	 for(BlueNote obj : lordBlues) {
-     				obj.paint(g);
-            	 }
-            	 for(PinkNote obj : lordPinks) {
-            		obj.paint(g);
-            	 }
-             } else {
-            	 for(BlueNote obj : weezeBlues) {
-     				obj.paint(g);
-            	 }
-            	 for(PinkNote obj : weezePinks) {
-            		obj.paint(g);
-            	 }
-             }
+        if (state == STATE.GAME) {
+            if (dir == 0) {
+                for (BlueNote obj : brazilBlues) {
+                	if (!obj.isHit) {
+                		obj.paint(g);
+                	}
+                }
+                for (PinkNote obj : brazilPinks) {
+                	if (!obj.isHit) {
+                		obj.paint(g);
+                	}
+                }
+            } else if (dir == 1) {
+                for (BlueNote obj : lordBlues) {
+                	if (!obj.isHit) {
+                		obj.paint(g);
+                	}
+                }
+                for (PinkNote obj : lordPinks) {
+                	if (!obj.isHit) {
+                		obj.paint(g);
+                	}
+                }
+            } else {
+                for (BlueNote obj : weezeBlues) {
+                	if (!obj.isHit) {
+                		obj.paint(g);
+                	}
+                }
+                for (PinkNote obj : weezePinks) {
+                	if (!obj.isHit) {
+                		obj.paint(g);
+                	}
+                }
+            }
         }
+
         
         
     }
@@ -183,19 +227,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     public void actionPerformed(ActionEvent e) {
     	
     	if(dir == 0) {
-    	for(int i = 0; i < brazilPinks.length; i++) {
-        if (brazilPinks[i].missed) {
+    	for(int i = 0; i < brazilPinks.size(); i++) {
+        if (brazilPinks.get(i).missed) {
             combo = 0;
-            brazilPinks[i].missed = false;
+            brazilPinks.get(i).missed = false;
             System.out.println("Score: " + score + " | Combo: 0");
             
         } 
     	}
     	
-    	for(int i = 0; i < brazilBlues.length; i++) {
-        if (brazilBlues[i].missed) {
+    	for(int i = 0; i < brazilBlues.size(); i++) {
+        if (brazilBlues.get(i).missed) {
             combo = 0;
-            brazilBlues[i].missed = false;
+            brazilBlues.get(i).missed = false;
             System.out.println("Score: " + score + " | Combo: 0");
         }
 
@@ -204,19 +248,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     }
     	
     	if(dir == 1) {
-    	for(int i = 0; i < lordPinks.length; i++) {
-            if (lordPinks[i].missed) {
+    	for(int i = 0; i < lordPinks.size(); i++) {
+            if (lordPinks.get(i).missed) {
                 combo = 0;
-                lordPinks[i].missed = false;
+                lordPinks.get(i).missed = false;
                 System.out.println("Score: " + score + " | Combo: 0");
                 
             } 
         	}
         	
-        	for(int i = 0; i < lordBlues.length; i++) {
-            if (lordBlues[i].missed) {
+        	for(int i = 0; i < lordBlues.size(); i++) {
+            if (lordBlues.get(i).missed) {
                 combo = 0;
-                lordBlues[i].missed = false;
+                lordBlues.get(i).missed = false;
                 System.out.println("Score: " + score + " | Combo: 0");
             }
 
@@ -224,25 +268,30 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         }
     	}
     	if(dir == 2) {
-        	for(int i = 0; i < weezePinks.length; i++) {
-                if (weezePinks[i].missed) {
+        	for(int i = 0; i < weezePinks.size(); i++) {
+                if (weezePinks.get(i).missed) {
                     combo = 0;
-                    weezePinks[i].missed = false;
+                    weezePinks.get(i).missed = false;
                     System.out.println("Score: " + score + " | Combo: 0");
                     
                 } 
             	}
             	
-            	for(int i = 0; i < weezeBlues.length; i++) {
-                if (weezeBlues[i].missed) {
+            	for(int i = 0; i < weezeBlues.size(); i++) {
+                if (weezeBlues.get(i).missed) {
                     combo = 0;
-                    weezeBlues[i].missed = false;
+                    weezeBlues.get(i).missed = false;
                     System.out.println("Score: " + score + " | Combo: 0");
                 }
 
             	}
             }
-    	
+    
+    	if (dir == 0) {
+    	    brazilPinks.removeIf(note -> note.missed || note.isHit);
+    	    brazilBlues.removeIf(note -> note.missed || note.isHit);
+    	}
+
     	repaint();
     }
 
@@ -267,13 +316,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 weezeMusic.play();
             }
         }
-        if (e.getKeyCode() == 101) { // 'e' key to return to menu
-            state = STATE.MENU;
-            titleScreenMusic.play();
-            score = 0;
-            dir = 0;
-            combo = 0;
-        }
+       
 
         if (state == STATE.SELECT) {
             if (e.getKeyCode() == 40) {
@@ -294,228 +337,89 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         if (state == STATE.GAME) {
             if (e.getKeyCode() == 70) {
             	
-            	
-            	if(dir == 0) {
-            	for(int i = 0; i < brazilPinks.length; i++) {
-	                String accuracy = accuracyCalculator(brazilPinks[i].x, hole.x);
-	
-	                currentAccuracy = accuracy;
-	                accuracyTimestamp = System.currentTimeMillis();
-	
-	                if (accuracy.equals("Perfect")) {
-	                    score += 300;
-	                    combo++;
-	                    accuracyColor = Color.GREEN;
-	                } else if (accuracy.equals("Good")) {
-	                    score += 200;
-	                    combo++;
-	                    accuracyColor = Color.CYAN;
-	                } else if (accuracy.equals("Okay")) {
-	                    score += 100;
-	                    combo++;
-	                    accuracyColor = Color.YELLOW;
-	                } else if (accuracy.equals("Bad")) {
-	                    score += 50;
-	                    combo = 0;
-	                    accuracyColor = Color.RED;
-	                } else {
-	                    combo = 0;
-	                    accuracyColor = Color.GRAY;
-	                }
-	
-	                System.out.println("Accuracy: " + accuracy);
-	                System.out.println("Score: " + score + " | Combo: " + combo);
-	                brazilPinks[i].x = 920;
-            	}
-            }
-            	if(dir == 1) {
-                	for(int i = 0; i < lordPinks.length; i++) {
-    	                String accuracy = accuracyCalculator(lordPinks[i].x, hole.x);
-    	
-    	                currentAccuracy = accuracy;
-    	                accuracyTimestamp = System.currentTimeMillis();
-    	
-    	                if (accuracy.equals("Perfect")) {
-    	                    score += 300;
-    	                    combo++;
-    	                    accuracyColor = Color.GREEN;
-    	                } else if (accuracy.equals("Good")) {
-    	                    score += 200;
-    	                    combo++;
-    	                    accuracyColor = Color.CYAN;
-    	                } else if (accuracy.equals("Okay")) {
-    	                    score += 100;
-    	                    combo++;
-    	                    accuracyColor = Color.YELLOW;
-    	                } else if (accuracy.equals("Bad")) {
-    	                    score += 50;
-    	                    combo = 0;
-    	                    accuracyColor = Color.RED;
-    	                } else {
-    	                    combo = 0;
-    	                    accuracyColor = Color.GRAY;
-    	                }
-    	
-    	                System.out.println("Accuracy: " + accuracy);
-    	                System.out.println("Score: " + score + " | Combo: " + combo);
-    	                lordPinks[i].x = 920;
-                	}
-                }
-            	
-            	if(dir == 2) {
-                	for(int i = 0; i < weezePinks.length; i++) {
-    	                String accuracy = accuracyCalculator(weezePinks[i].x, hole.x);
-    	
-    	                currentAccuracy = accuracy;
-    	                accuracyTimestamp = System.currentTimeMillis();
-    	
-    	                if (accuracy.equals("Perfect")) {
-    	                    score += 300;
-    	                    combo++;
-    	                    accuracyColor = Color.GREEN;
-    	                } else if (accuracy.equals("Good")) {
-    	                    score += 200;
-    	                    combo++;
-    	                    accuracyColor = Color.CYAN;
-    	                } else if (accuracy.equals("Okay")) {
-    	                    score += 100;
-    	                    combo++;
-    	                    accuracyColor = Color.YELLOW;
-    	                } else if (accuracy.equals("Bad")) {
-    	                    score += 50;
-    	                    combo = 0;
-    	                    accuracyColor = Color.RED;
-    	                } else {
-    	                    combo = 0;
-    	                    accuracyColor = Color.GRAY;
-    	                }
-    	
-    	                System.out.println("Accuracy: " + accuracy);
-    	                System.out.println("Score: " + score + " | Combo: " + combo);
-    	                weezePinks[i].x = 920;
-                	}
-                }
-            	
-            	
-            	
+            	 ArrayList<PinkNote> activeNotes = dir == 0 ? brazilPinks : dir == 1 ? lordPinks : weezePinks;
+            	    int targetX = hole.x;
+
+            	    PinkNote closestNote = null;
+            	    int closestDistance = Integer.MAX_VALUE;
+
+            	    for (PinkNote note : activeNotes) {
+            	        if (!note.isHit) {
+            	            int distance = Math.abs(note.x - targetX);
+            	            if (distance < closestDistance) {
+            	                closestDistance = distance;
+            	                closestNote = note;
+            	            }
+            	        }
+            	    }
+
+            	    if (closestNote != null) {
+            	        String accuracy = accuracyCalculator(closestNote.x, targetX);
+            	        currentAccuracy = accuracy;
+            	        accuracyTimestamp = System.currentTimeMillis();
+
+            	        switch (accuracy) {
+            	            case "Perfect":
+            	                score += 300; combo++; accuracyColor = Color.GREEN; break;
+            	            case "Good":
+            	                score += 200; combo++; accuracyColor = Color.CYAN; break;
+            	            case "Okay":
+            	                score += 100; combo++; accuracyColor = Color.YELLOW; break;
+            	            case "Bad":
+            	                score += 50; combo = 0; accuracyColor = Color.RED; break;
+            	            case "Miss":
+            	                combo = 0; accuracyColor = Color.GRAY; break;
+            	        }
+
+            	        closestNote.isHit = true;
+            	        System.out.println("Accuracy: " + accuracy);
+            	        System.out.println("Score: " + score + " | Combo: " + combo);
+            	    }
             }
 
             if (e.getKeyCode() == 74) {
             	
             	
-            if(dir == 0) {
-               	for(int i = 0; i < brazilBlues.length; i++) {	
-                String accuracy = accuracyCalculator(brazilBlues[i].x, hole2.x);
+            	    ArrayList<BlueNote> activeNotes = dir == 0 ? brazilBlues : dir == 1 ? lordBlues : weezeBlues;
+            	    int targetX = hole2.x;
 
-                currentAccuracy = accuracy;
-                accuracyTimestamp = System.currentTimeMillis();
+            	    BlueNote closestNote = null;
+            	    int closestDistance = Integer.MAX_VALUE;
 
-                if (accuracy.equals("Perfect")) {
-                    score += 300;
-                    combo++;
-                    accuracyColor = Color.GREEN;
-                } else if (accuracy.equals("Good")) {
-                    score += 200;
-                    combo++;
-                    accuracyColor = Color.CYAN;
-                } else if (accuracy.equals("Okay")) {
-                    score += 100;
-                    combo++;
-                    accuracyColor = Color.YELLOW;
-                } else if (accuracy.equals("Bad")) {
-                    score += 50;
-                    combo = 0;
-                    accuracyColor = Color.RED;
-                } else {
-                    combo = 0;
-                    accuracyColor = Color.GRAY;
-                }
+            	    for (BlueNote note : activeNotes) {
+            	        if (!note.isHit) {
+            	            int distance = Math.abs(note.x - targetX);
+            	            if (distance < closestDistance) {
+            	                closestDistance = distance;
+            	                closestNote = note;
+            	            }
+            	        }
+            	    }
 
-                System.out.println("Accuracy: " + accuracy);
-                System.out.println("Score: " + score + " | Combo: " + combo);
-                brazilBlues[i].x = 0;
-                
-                
-               	}
+            	    if (closestNote != null) {
+            	        String accuracy = accuracyCalculator(closestNote.x, targetX);
+            	        currentAccuracy = accuracy;
+            	        accuracyTimestamp = System.currentTimeMillis();
+
+            	        switch (accuracy) {
+            	            case "Perfect":
+            	                score += 300; combo++; accuracyColor = Color.GREEN; break;
+            	            case "Good":
+            	                score += 200; combo++; accuracyColor = Color.CYAN; break;
+            	            case "Okay":
+            	                score += 100; combo++; accuracyColor = Color.YELLOW; break;
+            	            case "Bad":
+            	                score += 50; combo = 0; accuracyColor = Color.RED; break;
+            	            case "Miss":
+            	                combo = 0; accuracyColor = Color.GRAY; break;
+            	        }
+
+            	        closestNote.isHit = true;
+            	        System.out.println("Accuracy: " + accuracy);
+            	        System.out.println("Score: " + score + " | Combo: " + combo);
+            	    }
+            	}
             }
-            
-            if(dir == 1) {
-               	for(int i = 0; i < lordBlues.length; i++) {	
-                String accuracy = accuracyCalculator(lordBlues[i].x, hole2.x);
-
-                currentAccuracy = accuracy;
-                accuracyTimestamp = System.currentTimeMillis();
-
-                if (accuracy.equals("Perfect")) {
-                    score += 300;
-                    combo++;
-                    accuracyColor = Color.GREEN;
-                } else if (accuracy.equals("Good")) {
-                    score += 200;
-                    combo++;
-                    accuracyColor = Color.CYAN;
-                } else if (accuracy.equals("Okay")) {
-                    score += 100;
-                    combo++;
-                    accuracyColor = Color.YELLOW;
-                } else if (accuracy.equals("Bad")) {
-                    score += 50;
-                    combo = 0;
-                    accuracyColor = Color.RED;
-                } else {
-                    combo = 0;
-                    accuracyColor = Color.GRAY;
-                }
-
-                System.out.println("Accuracy: " + accuracy);
-                System.out.println("Score: " + score + " | Combo: " + combo);
-                lordBlues[i].x = 0;
-                
-                
-               	}
-            }
-            
-            if(dir == 2) {
-               	for(int i = 0; i < weezeBlues.length; i++) {	
-                String accuracy = accuracyCalculator(weezeBlues[i].x, hole2.x);
-
-                currentAccuracy = accuracy;
-                accuracyTimestamp = System.currentTimeMillis();
-
-                if (accuracy.equals("Perfect")) {
-                    score += 300;
-                    combo++;
-                    accuracyColor = Color.GREEN;
-                } else if (accuracy.equals("Good")) {
-                    score += 200;
-                    combo++;
-                    accuracyColor = Color.CYAN;
-                } else if (accuracy.equals("Okay")) {
-                    score += 100;
-                    combo++;
-                    accuracyColor = Color.YELLOW;
-                } else if (accuracy.equals("Bad")) {
-                    score += 50;
-                    combo = 0;
-                    accuracyColor = Color.RED;
-                } else {
-                    combo = 0;
-                    accuracyColor = Color.GRAY;
-                }
-
-                System.out.println("Accuracy: " + accuracy);
-                System.out.println("Score: " + score + " | Combo: " + combo);
-                weezeBlues[i].x = 0;
-                
-                
-               	}
-            }
-            
-                
-            }
-        }
-        
-        
         
     }
 

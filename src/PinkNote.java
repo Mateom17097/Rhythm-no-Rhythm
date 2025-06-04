@@ -17,7 +17,7 @@ public class PinkNote {
 	int vx, vy;
 	double scaleWidth = 3.2;
 	double scaleHeight = 5.4;
-
+	public boolean isHit = false;
 	public boolean missed = false;
 
 	public PinkNote( int xx) {
@@ -29,7 +29,7 @@ public class PinkNote {
 		x = xx;
 		y = 720;
 
-		vx = -15;
+		vx = -20;
 		vy = 0;
 
 		tx = AffineTransform.getTranslateInstance(0, 0);
@@ -56,13 +56,14 @@ public class PinkNote {
 
 		init(x, y);
 
-		if (x <= 0) {
-			x = 920;
-			if (!missed) {
-				missed = true;
-				System.out.println("MISS!");
-			}
+		
+		if (x <= 0 && !missed && !isHit && x > -100) {
+		    missed = true;
+		    System.out.println("MISS!");
+		    x = -500;
+		    
 		}
+		
 
 		g2.drawImage(forward, tx, null);
 

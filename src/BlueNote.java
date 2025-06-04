@@ -17,7 +17,9 @@ public class BlueNote{
 	int vx, vy;						//movement variables
 	double scaleWidth = 3.2;		//change to scale image
 	double scaleHeight = 5.4; 		//change to scale image
+	public boolean isHit = false;
 	public boolean missed = false;
+	
 	public BlueNote( int xx) {
 		forward 	= getImage("/imgs/"+"blueNote.png"); //load the image for Tree
 
@@ -30,7 +32,7 @@ public class BlueNote{
 		y = 520;
 		
 		//if your movement will not be "hopping" base
-		vx = 15;
+		vx = 20;
 		vy = 0;
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
@@ -73,18 +75,17 @@ public class BlueNote{
 		
 		init(x,y);
 		
-		if(x >= 920 ) {
-			x = 0;
-			if (!missed) {
-				missed = true;
-			System.out.println("MISS!");
+		if (x >= 920 && !missed && !isHit && x < 1500) {
+		    missed = true;
+		    System.out.println("MISS!");
+		    x = 1600;
 		}
-		}
+		
 		
 		
 		g2.drawImage(forward, tx, null);
 			
-		//draw hitbox based on x,y, width, heigh
+		//draw hitbox based on x,y, width, height
 		//for collision detection
 		if(Frame.debugging) {
 			//draw hitbox only if debugging
