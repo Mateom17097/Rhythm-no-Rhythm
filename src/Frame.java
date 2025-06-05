@@ -747,6 +747,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         super.paintComponent(g);
         
         
+        
         if (state == STATE.MENU) {
             start.paint(g);
             titleCard.paint(g);
@@ -993,6 +994,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                         }
                     }
 
+                    if (e.getKeyCode() == KeyEvent.VK_R) {
+                        state = STATE.MENU;
+                    }
+                    
                     if (closestNote != null && Math.abs(closestNote.x - targetX) <= Bad) {
                         String accuracy = accuracyCalculator(closestNote.x, targetX);
                         currentAccuracy = accuracy;
