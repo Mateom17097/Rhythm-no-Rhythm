@@ -10,10 +10,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT }
     private STATE state = STATE.MENU;
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
-    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
-    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
-    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
+    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
+    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
 
     private boolean up;
     private boolean down;
@@ -35,6 +35,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private final int accuracyDisplayDuration = 1000; // milliseconds
     private Color accuracyColor = Color.WHITE;
 
+    chibiRoboPink pinkRobo = new chibiRoboPink();
+    chibiRoboBlue blueRobo = new chibiRoboBlue();
     kkSliders kk = new kkSliders(); 
   //  PinkNote pinkNote = new PinkNote(1000);
    // BlueNote blueNote = new BlueNote(-80);
@@ -86,9 +88,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
                 new ImageIcon("torch.png").getImage(),
                 new Point(0, 0), "custom cursor"));
+        chibiRoboPink pink = new chibiRoboPink(100, 100);
+        chibiRoboBlue blue = new chibiRoboBlue(300, 100);
 
-
-        //BRAZIL NOTES
+        addKeyListener(this);
+        setFocusable(true);
+        requestFocusInWindow();
+    
          //BRAZIL NOTES
             brazilBlues.add(new BlueNote(-1040));  //Base 0
             brazilPinks.add(new PinkNote(2220));//Base 1000
@@ -439,7 +445,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             lordBlues.add(new BlueNote(0));
             lordPinks.add(new PinkNote(920));
 
-           
+
         //WEEZE NOTES
             weezePinks.add(new PinkNote(840));
             weezeBlues.add(new BlueNote(-200));
@@ -724,6 +730,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             weezeBlues.add(new BlueNote(-59700));
 
             
+            
         Timer t = new Timer(16, this);
         t.start();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -738,7 +745,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        
+        
         if (state == STATE.MENU) {
             start.paint(g);
             titleCard.paint(g);
@@ -755,6 +763,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             hole.paint(g);
             hole2.paint(g);
             kk.paint(g);
+            pinkRobo.paint(g);
+            blueRobo.paint(g);
 
             g.setColor(Color.WHITE);
             g.setFont(myFont);
@@ -876,6 +886,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
     @Override
     public void keyPressed(KeyEvent e) {
+    	
         if (state == STATE.MENU && e.getKeyCode() == KeyEvent.VK_ENTER) {
             state = STATE.SELECT;
             return;
@@ -909,6 +920,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         if (state == STATE.GAME) {
             //F key (Pink Notes)
             if (e.getKeyCode() == 70) {
+            	pinkRobo.onKeyPressed(e);
                 if (debugging) System.out.println(hole.getVx());
 
                 ArrayList<PinkNote> activeNotes = dir == 0 ? brazilPinks : dir == 1 ? lordPinks : weezePinks;
@@ -932,98 +944,107 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                     currentAccuracy = accuracy;
                     accuracyTimestamp = System.currentTimeMillis();
 
-                    switch (accuracy) {
-                        case "Perfect":
-                            score += 300; combo++; accuracyColor = Color.GREEN; break;
-                        case "Good":
-                            score += 200; combo++; accuracyColor = Color.CYAN; break;
-                        case "Okay":
-                            score += 100; combo++; accuracyColor = Color.YELLOW; break;
-                        case "Bad":
-                            score += 50; combo++; accuracyColor = Color.RED; break;
+                    if (accuracy.equals("Perfect")) {
+                        score += 300;
+                        combo++;
+                        accuracyColor = Color.GREEN;
+                    } else if (accuracy.equals("Good")) {
+                        score += 200;
+                        combo++;
+                        accuracyColor = Color.CYAN;
+                    } else if (accuracy.equals("Okay")) {
+                        score += 100;
+                        combo++;
+                        accuracyColor = Color.YELLOW;
+                    } else if (accuracy.equals("Bad")) {
+                        score += 50;
+                        combo++;
+                        accuracyColor = Color.RED;
                     }
 
                     closestNote.isHit = true;
-                  //  System.out.println("Accuracy: " + accuracy);
-                    //System.out.println("Score: " + score + " | Combo: " + combo);
                 } else {
                     currentAccuracy = "Miss";
                     accuracyTimestamp = System.currentTimeMillis();
                     accuracyColor = Color.GRAY;
                     combo = 0;
-                 //   System.out.println("Accuracy: Miss");
-                 //   System.out.println("Score: " + score + " | Combo: 0");
                 }
-            }
+                }
 
-            //J key (Blue Notes)
-            if (e.getKeyCode() == 74) {
-                if (debugging) System.out.println(hole2.getVx());
+                // J key (Blue Notes)
+                if (e.getKeyCode() == 74) {
+                    
+                    if (debugging) {
+                    	System.out.println(hole2.getVx());
+                    }
+                    ArrayList<BlueNote> activeNotes = dir == 0 ? brazilBlues : dir == 1 ? lordBlues : weezeBlues;
+                    int targetX = hole2.x;
+                    blueRobo.onKeyPressed(e);
+                    BlueNote closestNote = null;
+                    int closestDistance = Integer.MAX_VALUE;
 
-                ArrayList<BlueNote> activeNotes = dir == 0 ? brazilBlues : dir == 1 ? lordBlues : weezeBlues;
-                int targetX = hole2.x;
-
-                BlueNote closestNote = null;
-                int closestDistance = Integer.MAX_VALUE;
-
-                for (BlueNote note : activeNotes) {
-                    if (!note.isHit) {
-                        int distance = Math.abs(note.x - targetX);
-                        if (distance < closestDistance) {
-                            closestDistance = distance;
-                            closestNote = note;
+                    for (BlueNote note : activeNotes) {
+                        if (!note.isHit) {
+                            int distance = Math.abs(note.x - targetX);
+                            if (distance < closestDistance) {
+                                closestDistance = distance;
+                                closestNote = note;
+                            }
                         }
                     }
-                }
 
-                if (closestNote != null && Math.abs(closestNote.x - targetX) <= Bad) {
-                    String accuracy = accuracyCalculator(closestNote.x, targetX);
-                    currentAccuracy = accuracy;
-                    accuracyTimestamp = System.currentTimeMillis();
+                    if (closestNote != null && Math.abs(closestNote.x - targetX) <= Bad) {
+                        String accuracy = accuracyCalculator(closestNote.x, targetX);
+                        currentAccuracy = accuracy;
+                        accuracyTimestamp = System.currentTimeMillis();
 
-                    switch (accuracy) {
-                        case "Perfect":
-                            score += 300; combo++; accuracyColor = Color.GREEN; break;
-                        case "Good":
-                            score += 200; combo++; accuracyColor = Color.CYAN; break;
-                        case "Okay":
-                            score += 100; combo++; accuracyColor = Color.YELLOW; break;
-                        case "Bad":
-                            score += 50; combo++; accuracyColor = Color.RED; break;
+                        if (accuracy.equals("Perfect")) {
+                            score += 300;
+                            combo++;
+                            accuracyColor = Color.GREEN;
+                        } else if (accuracy.equals("Good")) {
+                            score += 200;
+                            combo++;
+                            accuracyColor = Color.CYAN;
+                        } else if (accuracy.equals("Okay")) {
+                            score += 100;
+                            combo++;
+                            accuracyColor = Color.YELLOW;
+                        } else if (accuracy.equals("Bad")) {
+                            score += 50;
+                            combo++;
+                            accuracyColor = Color.RED;
+                        }
+
+                        closestNote.isHit = true;
+                    } else {
+                        currentAccuracy = "Miss";
+                        accuracyTimestamp = System.currentTimeMillis();
+                        accuracyColor = Color.GRAY;
+                        combo = 0;
                     }
-
-                    closestNote.isHit = true;
-                  //  System.out.println("Accuracy: " + accuracy);
-                  //  System.out.println("Score: " + score + " | Combo: " + combo);
-                } else {
-                    currentAccuracy = "Miss";
-                    accuracyTimestamp = System.currentTimeMillis();
-                    accuracyColor = Color.GRAY;
-                    combo = 0;
-                   // System.out.println("Accuracy: Miss");
-                   // System.out.println("Score: " + score + " | Combo: 0");
                 }
-            }
-        }
-    }
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (state == STATE.SELECT) {
-            if (e.getKeyCode() == 40) down = false;
-            else if (e.getKeyCode() == 38) up = false;
-        }
-    }
+                }
+                }
 
-    @Override 
-    public void mouseClicked(MouseEvent e) {}
-    @Override 
-    public void mouseEntered(MouseEvent e) {}
-    @Override 
-    public void mouseExited(MouseEvent e) {}
-    @Override
-    public void mousePressed(MouseEvent e) {}
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-    @Override
-    public void keyTyped(KeyEvent e) {}
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    if (state == STATE.SELECT) {
+                        if (e.getKeyCode() == 40) down = false;
+                        else if (e.getKeyCode() == 38) up = false;
+                    }
+                }
+
+                @Override 
+                public void mouseClicked(MouseEvent e) {}
+                @Override 
+                public void mouseEntered(MouseEvent e) {}
+                @Override 
+                public void mouseExited(MouseEvent e) {}
+                @Override
+                public void mousePressed(MouseEvent e) {}
+                @Override
+                public void mouseReleased(MouseEvent e) {}
+                @Override
+                public void keyTyped(KeyEvent e) {}
 }
