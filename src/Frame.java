@@ -89,6 +89,306 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 
         //BRAZIL NOTES
+         //BRAZIL NOTES
+            brazilBlues.add(new BlueNote(-1040));  //Base 0
+            brazilPinks.add(new PinkNote(2220));//Base 1000
+            brazilPinks.add(new PinkNote(2380));
+            brazilPinks.add(new PinkNote(2540));
+            brazilPinks.add(new PinkNote(2880));
+            brazilBlues.add(new BlueNote(-2320));
+            brazilBlues.add(new BlueNote(-2480));
+            brazilPinks.add(new PinkNote(3760));
+            brazilPinks.add(new PinkNote(4060));
+            
+            brazilPinks.add(new PinkNote(4540));
+            brazilBlues.add(new BlueNote(-4000));
+            brazilBlues.add(new BlueNote(-4160));
+            brazilBlues.add(new BlueNote(-4320));
+            brazilBlues.add(new BlueNote(-4660));
+            brazilPinks.add(new PinkNote(5860));
+            brazilPinks.add(new PinkNote(6020));
+            brazilBlues.add(new BlueNote(-5500));
+            brazilBlues.add(new BlueNote(-5800));
+            
+            brazilBlues.add(new BlueNote(-6340));
+            brazilPinks.add(new PinkNote(7580));
+            brazilBlues.add(new BlueNote(-6820));
+            brazilBlues.add(new BlueNote(-6980));
+            brazilPinks.add(new PinkNote(8220));
+            brazilBlues.add(new BlueNote(-7480));
+            brazilPinks.add(new PinkNote(8540));
+            brazilBlues.add(new BlueNote(-7660));
+            brazilPinks.add(new PinkNote(8680));
+            brazilBlues.add(new BlueNote(-7800));
+            brazilPinks.add(new PinkNote(8860));
+            brazilPinks.add(new PinkNote(9040));
+            brazilBlues.add(new BlueNote(-8140));
+            brazilPinks.add(new PinkNote(9200));
+            brazilBlues.add(new BlueNote(-9300));
+            brazilPinks.add(new PinkNote(9360));
+            brazilBlues.add(new BlueNote(-8640));
+            brazilPinks.add(new PinkNote(9680));
+
+            brazilBlues.add(new BlueNote(-8960));
+            brazilPinks.add(new PinkNote(10160));
+            brazilBlues.add(new BlueNote(-9460));
+            brazilBlues.add(new BlueNote(-9640));
+            brazilPinks.add(new PinkNote(10820));
+            brazilBlues.add(new BlueNote(-10060));
+            brazilPinks.add(new PinkNote(11160));
+            brazilBlues.add(new BlueNote(-10280));
+            brazilPinks.add(new PinkNote(11300));
+            brazilBlues.add(new BlueNote(-10420));
+            brazilPinks.add(new PinkNote(11500));
+            brazilPinks.add(new PinkNote(11640));
+            brazilBlues.add(new BlueNote(-10760));
+            brazilPinks.add(new PinkNote(11820));
+            brazilBlues.add(new BlueNote(-10920));
+            brazilPinks.add(new PinkNote(12000));
+            brazilBlues.add(new BlueNote(-11260));
+            brazilPinks.add(new PinkNote(12300));
+            
+            brazilBlues.add(new BlueNote(-11580));
+            brazilPinks.add(new PinkNote(12840));
+            brazilBlues.add(new BlueNote(-12100));
+            brazilBlues.add(new BlueNote(-12280));
+            brazilPinks.add(new PinkNote(13480));
+            brazilBlues.add(new BlueNote(-12720));
+            brazilPinks.add(new PinkNote(13780));
+            brazilBlues.add(new BlueNote(-12900));
+            brazilPinks.add(new PinkNote(13940));
+            brazilBlues.add(new BlueNote(-13040));
+            brazilPinks.add(new PinkNote(14100));
+            brazilPinks.add(new PinkNote(14280));
+            brazilBlues.add(new BlueNote(-13380));
+            brazilPinks.add(new PinkNote(14440));
+            brazilBlues.add(new BlueNote(-133540));
+            brazilPinks.add(new PinkNote(14620));
+            brazilBlues.add(new BlueNote(-13880));
+            brazilPinks.add(new PinkNote(14920));
+            
+            brazilBlues.add(new BlueNote(-14160));
+            brazilPinks.add(new PinkNote(15160));
+            brazilBlues.add(new BlueNote(-14420));
+            brazilPinks.add(new PinkNote(15340));
+            brazilBlues.add(new BlueNote(-14600));
+            brazilPinks.add(new PinkNote(15500));
+            brazilPinks.add(new PinkNote(15720));
+            brazilBlues.add(new BlueNote(-14940));
+            brazilPinks.add(new PinkNote(15880));
+            brazilBlues.add(new BlueNote(-15100));
+            brazilPinks.add(new PinkNote(16040));
+            brazilBlues.add(new BlueNote(-15320));
+            brazilPinks.add(new PinkNote(16280));
+            brazilBlues.add(new BlueNote(-15500));
+            brazilPinks.add(new PinkNote(16460));
+            brazilBlues.add(new BlueNote(-15740));
+            brazilPinks.add(new PinkNote(16700));
+
+            brazilBlues.add(new BlueNote(-16020));
+            brazilPinks.add(new PinkNote(16920));
+            brazilBlues.add(new BlueNote(-16200));
+            brazilBlues.add(new BlueNote(-16360));
+            brazilPinks.add(new PinkNote(17240));
+            brazilBlues.add(new BlueNote(-16720));
+            brazilPinks.add(new PinkNote(17500));
+            brazilBlues.add(new BlueNote(-16880));
+            brazilPinks.add(new PinkNote(17640));
+            brazilBlues.add(new BlueNote(-17040));
+            brazilPinks.add(new PinkNote(17820));
+            brazilPinks.add(new PinkNote(17960));
+            brazilBlues.add(new BlueNote(-17380));
+            brazilPinks.add(new PinkNote(18120));
+            brazilBlues.add(new BlueNote(-17520));
+            brazilPinks.add(new PinkNote(18280));
+            brazilBlues.add(new BlueNote(-17780));
+            brazilPinks.add(new PinkNote(18520));
+
+            brazilBlues.add(new BlueNote(-18000));
+            brazilPinks.add(new PinkNote(18740));
+            brazilBlues.add(new BlueNote(-18220));
+            brazilPinks.add(new PinkNote(18920));
+            brazilBlues.add(new BlueNote(-18400));
+            brazilPinks.add(new PinkNote(19100));
+            brazilPinks.add(new PinkNote(19340));
+            brazilBlues.add(new BlueNote(-18740));
+            brazilPinks.add(new PinkNote(19500));
+            brazilBlues.add(new BlueNote(-18900));
+            brazilPinks.add(new PinkNote(19680));
+            brazilBlues.add(new BlueNote(-19120));
+            brazilPinks.add(new PinkNote(19920));
+            brazilBlues.add(new BlueNote(-19300));
+            brazilPinks.add(new PinkNote(20100));
+            brazilBlues.add(new BlueNote(-19540));
+            brazilPinks.add(new PinkNote(20340));
+
+            brazilBlues.add(new BlueNote(-19820));
+            brazilPinks.add(new PinkNote(20560));
+            brazilBlues.add(new BlueNote(-20000));
+            brazilBlues.add(new BlueNote(-20160));
+            brazilPinks.add(new PinkNote(20880));
+            brazilBlues.add(new BlueNote(-20520));
+            brazilPinks.add(new PinkNote(21140));
+            brazilBlues.add(new BlueNote(-20680));
+            brazilPinks.add(new PinkNote(21280));
+            brazilBlues.add(new BlueNote(-20840));
+            brazilPinks.add(new PinkNote(21460));
+            brazilPinks.add(new PinkNote(21600));
+            brazilBlues.add(new BlueNote(-21180));
+            brazilPinks.add(new PinkNote(21760));
+            brazilBlues.add(new BlueNote(-21320));
+            brazilPinks.add(new PinkNote(21920));
+            brazilBlues.add(new BlueNote(-21580));
+            brazilPinks.add(new PinkNote(22160));
+
+            brazilBlues.add(new BlueNote(-21800));
+            brazilPinks.add(new PinkNote(22380));
+            brazilBlues.add(new BlueNote(-22020));
+            brazilPinks.add(new PinkNote(22560));
+            brazilBlues.add(new BlueNote(-22200));
+            brazilPinks.add(new PinkNote(22740));
+            brazilPinks.add(new PinkNote(22980));
+            brazilBlues.add(new BlueNote(-22540));
+            brazilPinks.add(new PinkNote(23140));
+            brazilBlues.add(new BlueNote(-22700));
+            brazilPinks.add(new PinkNote(23320));
+            brazilBlues.add(new BlueNote(-22920));
+            brazilPinks.add(new PinkNote(23560));
+            brazilBlues.add(new BlueNote(-23100));
+            brazilPinks.add(new PinkNote(23740));
+            brazilBlues.add(new BlueNote(-23340));
+            brazilPinks.add(new PinkNote(23980));
+
+            brazilBlues.add(new BlueNote(-23620));
+            brazilPinks.add(new PinkNote(24200));
+            brazilBlues.add(new BlueNote(-23800));
+            brazilBlues.add(new BlueNote(-23960));
+            brazilPinks.add(new PinkNote(24520));
+            brazilBlues.add(new BlueNote(-24320));
+            brazilPinks.add(new PinkNote(24780));
+            brazilBlues.add(new BlueNote(-24480));
+            brazilPinks.add(new PinkNote(24920));
+            brazilBlues.add(new BlueNote(-24640));
+            brazilPinks.add(new PinkNote(25100));
+            brazilPinks.add(new PinkNote(25240));
+            brazilBlues.add(new BlueNote(-24980));
+            brazilPinks.add(new PinkNote(25400));
+            brazilBlues.add(new BlueNote(-25120));
+            brazilPinks.add(new PinkNote(25560));
+            brazilBlues.add(new BlueNote(-25380));
+            brazilPinks.add(new PinkNote(25800));
+
+            brazilBlues.add(new BlueNote(-25600));
+            brazilPinks.add(new PinkNote(26020));
+            brazilBlues.add(new BlueNote(-25820));
+            brazilPinks.add(new PinkNote(26200));
+            brazilBlues.add(new BlueNote(-26000));
+            brazilPinks.add(new PinkNote(26380));
+            brazilPinks.add(new PinkNote(26620));
+            brazilBlues.add(new BlueNote(-26340));
+            brazilPinks.add(new PinkNote(26780));
+            brazilBlues.add(new BlueNote(-26500));
+            brazilPinks.add(new PinkNote(26960));
+            brazilBlues.add(new BlueNote(-26720));
+            brazilPinks.add(new PinkNote(27200));
+            brazilBlues.add(new BlueNote(-26900));
+            brazilPinks.add(new PinkNote(27380));
+            brazilBlues.add(new BlueNote(-27140));
+            brazilPinks.add(new PinkNote(27620));
+
+            brazilBlues.add(new BlueNote(-27420));
+            brazilPinks.add(new PinkNote(27840));
+            brazilBlues.add(new BlueNote(-27600));
+            brazilBlues.add(new BlueNote(-27760));
+            brazilPinks.add(new PinkNote(28160));
+            brazilBlues.add(new BlueNote(-28120));
+            brazilPinks.add(new PinkNote(28420));
+            brazilBlues.add(new BlueNote(-28280));
+            brazilPinks.add(new PinkNote(28580));
+            brazilBlues.add(new BlueNote(-28440));
+            brazilPinks.add(new PinkNote(28740));
+            brazilPinks.add(new PinkNote(28880));
+            brazilBlues.add(new BlueNote(-28780));
+            brazilPinks.add(new PinkNote(29040));
+            brazilBlues.add(new BlueNote(-28920));
+            brazilPinks.add(new PinkNote(29200));
+            brazilBlues.add(new BlueNote(-29180));
+            brazilPinks.add(new PinkNote(29440));
+
+            brazilBlues.add(new BlueNote(-29460));
+            brazilPinks.add(new PinkNote(29660));
+            brazilBlues.add(new BlueNote(-29680));
+            brazilPinks.add(new PinkNote(29840));
+            brazilBlues.add(new BlueNote(-29860));
+            brazilPinks.add(new PinkNote(30020));
+            brazilPinks.add(new PinkNote(30260));
+            brazilBlues.add(new BlueNote(-30200));
+            brazilPinks.add(new PinkNote(30380));
+            brazilBlues.add(new BlueNote(-30360));
+            brazilPinks.add(new PinkNote(30560));
+            brazilBlues.add(new BlueNote(-30540));
+            brazilPinks.add(new PinkNote(30800));
+            brazilBlues.add(new BlueNote(-30780));
+            brazilPinks.add(new PinkNote(30980));
+            brazilBlues.add(new BlueNote(-30960));
+            brazilPinks.add(new PinkNote(31140));
+
+            brazilBlues.add(new BlueNote(-31280));
+            brazilPinks.add(new PinkNote(31380));
+            brazilBlues.add(new BlueNote(-31420));
+            brazilBlues.add(new BlueNote(-31580));
+            brazilPinks.add(new PinkNote(31760));
+            brazilBlues.add(new BlueNote(-31840));
+            brazilPinks.add(new PinkNote(32020));
+            brazilBlues.add(new BlueNote(-32000));
+            brazilPinks.add(new PinkNote(32180));
+            brazilBlues.add(new BlueNote(-32260));
+            brazilPinks.add(new PinkNote(32380));
+            brazilPinks.add(new PinkNote(32540));
+            brazilBlues.add(new BlueNote(-32680));
+            brazilPinks.add(new PinkNote(32760));
+            brazilBlues.add(new BlueNote(-32920));
+            brazilPinks.add(new PinkNote(32980));
+            brazilBlues.add(new BlueNote(-33140));
+            brazilPinks.add(new PinkNote(33260));
+
+            brazilBlues.add(new BlueNote(-33400));
+            brazilPinks.add(new PinkNote(33540));
+            brazilBlues.add(new BlueNote(-33620));
+            brazilPinks.add(new PinkNote(33720));
+            brazilBlues.add(new BlueNote(-33800));
+            brazilPinks.add(new PinkNote(33960));
+            brazilPinks.add(new PinkNote(34120));
+            brazilBlues.add(new BlueNote(-34260));
+            brazilPinks.add(new PinkNote(34300));
+            brazilBlues.add(new BlueNote(-34460));
+            brazilPinks.add(new PinkNote(34540));
+            brazilBlues.add(new BlueNote(-34620));
+            brazilPinks.add(new PinkNote(34780));
+            brazilBlues.add(new BlueNote(-34860));
+            brazilPinks.add(new PinkNote(34940));
+            brazilBlues.add(new BlueNote(-35080));
+            brazilPinks.add(new PinkNote(35160));
+
+            brazilBlues.add(new BlueNote(-35300));
+            brazilPinks.add(new PinkNote(35420));
+            brazilBlues.add(new BlueNote(-35500));
+            brazilBlues.add(new BlueNote(-35660));
+            brazilPinks.add(new PinkNote(35800));
+            brazilBlues.add(new BlueNote(-35940));
+            brazilPinks.add(new PinkNote(36080));
+            brazilBlues.add(new BlueNote(-36160));
+            brazilPinks.add(new PinkNote(36300));
+            brazilBlues.add(new BlueNote(-36440));
+            brazilPinks.add(new PinkNote(36480));
+            brazilPinks.add(new PinkNote(36620));
+            brazilBlues.add(new BlueNote(-36760));
+            brazilPinks.add(new PinkNote(36840));
+            brazilBlues.add(new BlueNote(-37000));
+            brazilPinks.add(new PinkNote(37060));
+            brazilBlues.add(new BlueNote(-37220));
+            brazilPinks.add(new PinkNote(37380));
+        /*
             brazilBlues.add(new BlueNote(-1040));  //Base 0
             brazilPinks.add(new PinkNote(2220));//Base 1000
             brazilPinks.add(new PinkNote(2380));
@@ -128,7 +428,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             brazilBlues.add(new BlueNote(-8620));
             brazilPinks.add(new PinkNote(9700));
             
-            /*
+            
             
             brazilBlues.add(new BlueNote(-1040));
             brazilBlues.add(new BlueNote(-1040));
