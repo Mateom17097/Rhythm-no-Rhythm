@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
-    public static boolean debugging = true;
+    public static boolean debugging = false;
 
-    private enum STATE { MENU, GAME, SELECT }
+    private enum STATE { MENU, GAME, SELECT, END }
     private STATE state = STATE.MENU;
 
     SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
@@ -22,7 +22,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
     int score = 0;
     int combo = 0;
+    
+    boolean showEndImage = false;
 
+
+    SimpleAudioPlayer currentSong;
+    
     Font myFont = new Font("Courier", Font.BOLD, 30);
 
     private final int Perfect = 20;
@@ -35,6 +40,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private final int accuracyDisplayDuration = 1000; // milliseconds
     private Color accuracyColor = Color.WHITE;
 
+    payCheck payCheck = new payCheck();
     chibiRoboPink pinkRobo = new chibiRoboPink();
     chibiRoboBlue blueRobo = new chibiRoboBlue();
     kkSliders kk = new kkSliders(); 
@@ -1124,7 +1130,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+        Graphics2D g2 = (Graphics2D) g;
         
         
         if (state == STATE.MENU) {
@@ -1145,7 +1151,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             kk.paint(g);
             pinkRobo.paint(g);
             blueRobo.paint(g);
-
+            if (showEndImage) {
+            	g2.setColor(new Color(0, 0, 0, 150));
+            	g2.fillRect(0, 0, 1280, 1280);
+                payCheck.paint(g);
+                return; 	
+            }
             g.setColor(Color.WHITE);
             g.setFont(myFont);
             g.drawString("Score: " + score, 15, 50);
@@ -1197,10 +1208,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
             if (dir == 0) {
                 brazil.paint(g);
+                currentSong = brazilMusic;
             } else if (dir == 1) {
                 lord.paint(g);
+                currentSong = lordMusic;
             } else {
                 weeze.paint(g);
+                currentSong = weezeMusic;
             }
 
             if (up) {
@@ -1215,7 +1229,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             g.setColor(Color.WHITE);
             g.setFont(new Font("Courier", Font.PLAIN, 20));
             
-            String controlsText = "CONTROLS: F = Pink Notes | J = Blue Notes | ENTER = Confirm";
+            String controlsText = "CONTROLS: F = Pink Notes | J = Blue Notes | ENTER = Confirm | R = Return to Menu";
             int stringWidth = g.getFontMetrics().stringWidth(controlsText);
             int x = ((width - stringWidth) / 2) + 25;   
             int y = height - 40;  
@@ -1260,7 +1274,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             }
         }
 
-     
+        if (!showEndImage && currentSong != null && currentSong.isDone()) {
+            showEndImage = true;
+        }
+        
         repaint();
     }
 
@@ -1288,16 +1305,34 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         }
 
         if (state == STATE.SELECT) {
+        	 if (e.getKeyCode() == KeyEvent.VK_R) {
+                 state = STATE.MENU;
+                 
+             }
             if (e.getKeyCode() == 40) {
                 down = true;
-                if (dir < 2) dir++;
+                if (dir < 2) 
+                	dir++;
             } else if (e.getKeyCode() == 38) {
                 up = true;
-                if (dir > 0) dir--;
+                if (dir > 0)
+                	dir--;
             }
         }
 
         if (state == STATE.GAME) {
+        	 if (e.getKeyCode() == KeyEvent.VK_R) {
+        		 if (dir == 0) {
+                     brazilMusic.pause();
+                 } else if (dir == 1) {
+                     lordMusic.pause();
+                 } else if (dir == 2){
+                     weezeMusic.pause();
+                 }
+        		 
+                 state = STATE.MENU;
+                
+             }
             //F key (Pink Notes)
             if (e.getKeyCode() == 70) {
             	pinkRobo.onKeyPressed(e);
@@ -1373,9 +1408,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                         }
                     }
 
-                    if (e.getKeyCode() == KeyEvent.VK_R) {
-                        state = STATE.MENU;
-                    }
+                   
                     
                     if (closestNote != null && Math.abs(closestNote.x - targetX) <= Bad) {
                         String accuracy = accuracyCalculator(closestNote.x, targetX);
@@ -1414,8 +1447,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                 @Override
                 public void keyReleased(KeyEvent e) {
                     if (state == STATE.SELECT) {
-                        if (e.getKeyCode() == 40) down = false;
-                        else if (e.getKeyCode() == 38) up = false;
+                        if (e.getKeyCode() == 40) 
+                        	down = false;
+                        else if (e.getKeyCode() == 38) 
+                        	up = false;
                     }
                 }
 

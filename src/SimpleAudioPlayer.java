@@ -26,6 +26,13 @@ public class SimpleAudioPlayer   {
     AudioInputStream audioInputStream; 
     static String filePath; 
   
+    private boolean isFinished = false;
+    
+    public boolean isDone() {
+        return isFinished;
+    }
+
+    
     // constructor to initialize streams and clip 
     public SimpleAudioPlayer(String fileName, boolean loop) 
     { 
@@ -43,6 +50,16 @@ public class SimpleAudioPlayer   {
 	        // open audioInputStream to the clip 
 	        clip.open(audioInputStream); 
 	          
+	        clip.addLineListener(new LineListener() {
+                @Override
+                public void update(LineEvent event) {
+                    if (event.getType() == LineEvent.Type.STOP && !clip.isRunning()) {
+                        isFinished = true; 
+                    }
+                }
+            });
+	        
+	        
 	        if(loop) {
 	        	clip.loop(Clip.LOOP_CONTINUOUSLY); 
 	        }
