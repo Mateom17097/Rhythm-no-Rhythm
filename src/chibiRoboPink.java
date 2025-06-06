@@ -92,7 +92,7 @@ public class chibiRoboPink {
             // Revert back to original image after a short delay
             new Thread(() -> {
                 try {
-                    Thread.sleep(200); // 200 milliseconds
+                    Thread.sleep(100); // 200 milliseconds
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }

@@ -92,7 +92,7 @@ public class chibiRoboBlue {
             // Revert after a short delay
             new Thread(() -> {
                 try {
-                    Thread.sleep(200); // 200 milliseconds
+                    Thread.sleep(100); // 100 milliseconds
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
