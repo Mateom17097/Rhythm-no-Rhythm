@@ -161,7 +161,7 @@ public class SimpleAudioPlayer   {
         audioInputStream = AudioSystem.getAudioInputStream( 
         new File(filePath).getAbsoluteFile()); 
         clip.open(audioInputStream); 
-        clip.loop(Clip.LOOP_CONTINUOUSLY); 
+
     } 
 	
 
