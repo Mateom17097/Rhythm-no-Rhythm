@@ -1155,7 +1155,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             	g2.setColor(new Color(0, 0, 0, 150));
             	g2.fillRect(0, 0, 1280, 1280);
                 payCheck.paint(g);
-                return; 	
+                g2.setColor(Color.WHITE);
+                g2.setFont(new Font("Arial", Font.BOLD, 36));
+                g2.drawString("$" + score, 150, 300);
+                	
             }
             g.setColor(Color.WHITE);
             g.setFont(myFont);
