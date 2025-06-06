@@ -10,10 +10,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     private enum STATE { MENU, GAME, SELECT, END }
     private STATE state = STATE.MENU;
 
-    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
-    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
-    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
-    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("H:\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
+    SimpleAudioPlayer titleScreenMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\ATW.wav", true);
+    SimpleAudioPlayer brazilMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\brazil.wav", false);
+    SimpleAudioPlayer lordMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\lord.wav", false);
+    SimpleAudioPlayer weezeMusic = new SimpleAudioPlayer("C:\\Users\\Shiyam\\git\\Rhythm-no-Rhythm\\src\\weeze.wav", false);
 
     private boolean up;
     private boolean down;
@@ -174,7 +174,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             brazilPinks.add(new PinkNote(14280));
             brazilBlues.add(new BlueNote(-13380));
             brazilPinks.add(new PinkNote(14440));
-            brazilBlues.add(new BlueNote(-133540));
+            brazilBlues.add(new BlueNote(-13540));
             brazilPinks.add(new PinkNote(14620));
             brazilBlues.add(new BlueNote(-13880));
             brazilPinks.add(new PinkNote(14920));
@@ -1155,9 +1155,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             	g2.setColor(new Color(0, 0, 0, 150));
             	g2.fillRect(0, 0, 1280, 1280);
                 payCheck.paint(g);
-                g2.setColor(Color.WHITE);
+                g2.setColor(Color.BLACK);
                 g2.setFont(new Font("Arial", Font.BOLD, 36));
-                g2.drawString("$" + score, 150, 300);
+                g2.drawString("$" + score, 500, 600);
                 	
             }
             g.setColor(Color.WHITE);
@@ -1292,7 +1292,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             return;
         }
         if (state == STATE.SELECT && e.getKeyCode() == KeyEvent.VK_ENTER) {
-            try {
+        	showEndImage = false;
+        	score = 0;
+        	combo = 0;
+        	try {
                 titleScreenMusic.stop();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -1310,6 +1313,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
         if (state == STATE.SELECT) {
         	 if (e.getKeyCode() == KeyEvent.VK_R) {
                  state = STATE.MENU;
+                 
                  
              }
             if (e.getKeyCode() == 40) {
@@ -1334,7 +1338,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
                  }
         		 
                  state = STATE.MENU;
-                
+                 showEndImage = false;
              }
             //F key (Pink Notes)
             if (e.getKeyCode() == 70) {
